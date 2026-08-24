@@ -57,10 +57,19 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
+        /* Recipe Header */
         .recipe-header {
             background-color: #386641;
             color: white;
-            padding: 52px 40px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
         }
 
         .recipe-header p {
@@ -79,11 +88,22 @@
         .recipe-header .description {
             max-width: 680px;
             margin-top: 18px;
-            color: #386641 ;
+            color: white;
             font-size: 1.1rem;
             line-height: 1.6;
         }
 
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
         .recipe-layout {
             display: grid;
             grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
@@ -136,6 +156,7 @@
             text-align: center;
         }
 
+        /* Mobile */
         @media (max-width: 700px) {
             body {
                 padding: 10px;
@@ -151,6 +172,17 @@
                 padding: 30px 24px;
             }
 
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
             .recipe-layout {
                 grid-template-columns: 1fr;
             }
@@ -162,24 +194,55 @@
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <a class="logo" href="index.html">K's Kitchen</a>
-        <a class="back-link" href="index.html?cuisine=greek">Back to Greek recipes</a>
+        <a class="back-link" href="index.html?cuisine=greek">
+            Back to Greek recipes
+        </a>
     </header>
 
     <main>
+
+        <!-- Recipe Header -->
         <section class="recipe-header">
-            <p style="text-transform: none;">Greek Cuisine</p>
-            <h1>Greek Salad</h1>
-            <p class="description" style="text-transform: none;">
-                Crisp vegetables, olives, herbs, and a bright Greek-inspired dressing.
-            </p>
+
+            <div class="recipe-header-content">
+
+                <p style="text-transform: none;">
+                    Greek Cuisine
+                </p>
+
+                <h1>
+                    Greek Salad
+                </h1>
+
+                <p class="description" style="text-transform: none;">
+                    Crisp vegetables, olives, herbs, and a bright Greek-inspired dressing.
+                </p>
+
+            </div>
+
+            <!-- Recipe Image -->
+            <img
+                class="recipe-header-image"
+                src="Greek-Salad.jpg"
+                alt="Greek Salad"
+            >
+
         </section>
 
+
+        <!-- Recipe Content -->
         <div class="recipe-layout">
+
+            <!-- Ingredients -->
             <aside class="recipe-sidebar">
+
                 <h2>Ingredients</h2>
+
                 <ul>
                     <li>1 lb ground beef (lean)</li>
                     <li>1 small onion (finely diced)</li>
@@ -190,7 +253,9 @@
                     <li>2 tbsp olive oil or ghee</li>
                 </ul>
 
+
                 <h2>Spices</h2>
+
                 <ul class="spice-list">
                     <li>1 tsp cumin</li>
                     <li>1 tsp garam masala</li>
@@ -199,25 +264,55 @@
                     <li>1/2 to 1 tsp chili powder (adjust heat)</li>
                     <li>Salt to taste</li>
                 </ul>
+
             </aside>
 
+
+            <!-- Instructions -->
             <section class="recipe-instructions">
+
                 <h2>Instructions</h2>
+
                 <ol>
-                    <li>Heat oil, then saute the onion for 4 to 5 minutes until soft.</li>
-                    <li>Add the garlic and ginger and cook for 1 minute.</li>
-                    <li>Add the spices and toast for 30 seconds. This is key for flavor.</li>
-                    <li>Add the ground beef, break it apart, and cook it through.</li>
-                    <li>Add the tomatoes and simmer for 5 to 7 minutes.</li>
-                    <li>Add the peas and cook for another 3 to 5 minutes.</li>
-                    <li>Finish with fresh cilantro and a squeeze of lemon.</li>
+                    <li>
+                        Heat oil, then saute the onion for 4 to 5 minutes until soft.
+                    </li>
+
+                    <li>
+                        Add the garlic and ginger and cook for 1 minute.
+                    </li>
+
+                    <li>
+                        Add the spices and toast for 30 seconds. This is key for flavor.
+                    </li>
+
+                    <li>
+                        Add the ground beef, break it apart, and cook it through.
+                    </li>
+
+                    <li>
+                        Add the tomatoes and simmer for 5 to 7 minutes.
+                    </li>
+
+                    <li>
+                        Add the peas and cook for another 3 to 5 minutes.
+                    </li>
+
+                    <li>
+                        Finish with fresh cilantro and a squeeze of lemon.
+                    </li>
                 </ol>
+
             </section>
+
         </div>
+
     </main>
+
 
     <footer>
         <p>K's Kitchen</p>
     </footer>
+
 </body>
 </html>
