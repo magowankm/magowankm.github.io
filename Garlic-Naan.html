@@ -57,10 +57,19 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
+        /* Recipe Header */
         .recipe-header {
             background-color: #b45f06;
             color: white;
-            padding: 52px 40px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
         }
 
         .recipe-header p {
@@ -84,6 +93,17 @@
             line-height: 1.6;
         }
 
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
         .recipe-layout {
             display: grid;
             grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
@@ -133,9 +153,9 @@
             margin: 0 auto;
             color: #666;
             font-size: 0.9rem;
-            text-align: center;
         }
 
+        /* Mobile */
         @media (max-width: 700px) {
             body {
                 padding: 10px;
@@ -151,6 +171,17 @@
                 padding: 30px 24px;
             }
 
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
             .recipe-layout {
                 grid-template-columns: 1fr;
             }
@@ -162,24 +193,58 @@
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <a class="logo" href="index.html">K's Kitchen</a>
-        <a class="back-link" href="index.html?cuisine=indian">Back to Indian recipes</a>
+
+        <a class="back-link" href="index.html?cuisine=indian">
+            Back to Indian recipes
+        </a>
     </header>
 
+
     <main>
+
+        <!-- Recipe Header -->
         <section class="recipe-header">
-            <p style="text-transform: none;">Indian Cuisine</p>
-            <h1>Garlic Naan</h1>
-            <p class="description" style="text-transform: none;">
-                Soft and fluffy flatbread infused with fresh garlic and herbs.
-            </p>
+
+            <div class="recipe-header-content">
+
+                <p style="text-transform: none;">
+                    Indian Cuisine
+                </p>
+
+                <h1>
+                    Garlic Naan
+                </h1>
+
+                <p class="description" style="text-transform: none;">
+                    Soft and fluffy flatbread infused with fresh garlic and herbs.
+                </p>
+
+            </div>
+
+
+            <!-- Recipe Image -->
+            <img
+                class="recipe-header-image"
+                src="Garlic-Naan.jpg"
+                alt="Garlic Naan"
+            >
+
         </section>
 
+
+        <!-- Recipe Content -->
         <div class="recipe-layout">
+
+            <!-- Ingredients -->
             <aside class="recipe-sidebar">
+
                 <h2>Ingredients</h2>
+
                 <ul>
                     <li>2 cups all-purpose flour</li>
                     <li>1 tsp instant yeast</li>
@@ -192,32 +257,83 @@
                     <li>1 clove garlic, minced, optional</li>
                     <li>1 tbsp chopped cilantro, optional</li>
                 </ul>
+
             </aside>
 
+
+            <!-- Instructions -->
             <section class="recipe-instructions">
+
                 <h2>Instructions</h2>
+
                 <ol>
-                    <li>Make the dough: In a large bowl, combine the flour, yeast, sugar, salt, and baking powder.</li>
-                    <li>Add the yogurt, warm water, and oil. Mix until a shaggy dough forms.</li>
-                    <li>Knead for about 5–7 minutes until the dough becomes smooth and elastic. If it's sticky, add flour 1 tablespoon at a time. If it's too dry, add water 1 tablespoon at a time.</li>
-                    <li>You want a soft dough that is slightly tacky but not sticking heavily to your hands.</li>
-                    <li>Let it rise: Put the dough in a lightly oiled bowl and cover it. Let it sit somewhere warm for about 60–90 minutes, until roughly doubled in size.</li>
-                    <li>Divide: Punch the dough down and divide it into 6 equal pieces.</li>
-                    <li>Roll each piece into a ball and let them rest for another 10 minutes.</li>
-                    <li>Shape the naan: Roll each ball into an oval about ⅛-inch thick. Don't worry about making them perfectly shaped. The irregular edges are part of the appeal.</li>
-                    <li>For garlic naan, press a little minced garlic and cilantro into one side of the dough.</li>
-                    <li>Cook in a very hot pan: Heat a cast-iron skillet or heavy stainless-steel pan over medium-high to high heat. You want the pan very hot before the first naan goes in.</li>
-                    <li>Place the naan garlic-side down if you've added garlic.</li>
-                    <li>Cook for about 60–90 seconds, until bubbles form and the bottom develops dark brown or charred spots.</li>
-                    <li>Flip and cook another 30–60 seconds. You want some nice blistering and char without drying the naan out.</li>
-                    <li>Finish: Brush immediately with a little olive oil and sprinkle with cilantro and a tiny pinch of salt.</li>
+                    <li>
+                        Make the dough: In a large bowl, combine the flour, yeast, sugar, salt, and baking powder.
+                    </li>
+
+                    <li>
+                        Add the yogurt, warm water, and oil. Mix until a shaggy dough forms.
+                    </li>
+
+                    <li>
+                        Knead for about 5–7 minutes until the dough becomes smooth and elastic. If it's sticky, add flour 1 tablespoon at a time. If it's too dry, add water 1 tablespoon at a time.
+                    </li>
+
+                    <li>
+                        You want a soft dough that is slightly tacky but not sticking heavily to your hands.
+                    </li>
+
+                    <li>
+                        Let it rise: Put the dough in a lightly oiled bowl and cover it. Let it sit somewhere warm for about 60–90 minutes, until roughly doubled in size.
+                    </li>
+
+                    <li>
+                        Divide: Punch the dough down and divide it into 6 equal pieces.
+                    </li>
+
+                    <li>
+                        Roll each piece into a ball and let them rest for another 10 minutes.
+                    </li>
+
+                    <li>
+                        Shape the naan: Roll each ball into an oval about ⅛-inch thick. Don't worry about making them perfectly shaped. The irregular edges are part of the appeal.
+                    </li>
+
+                    <li>
+                        For garlic naan, press a little minced garlic and cilantro into one side of the dough.
+                    </li>
+
+                    <li>
+                        Cook in a very hot pan: Heat a cast-iron skillet or heavy stainless-steel pan over medium-high to high heat. You want the pan very hot before the first naan goes in.
+                    </li>
+
+                    <li>
+                        Place the naan garlic-side down if you've added garlic.
+                    </li>
+
+                    <li>
+                        Cook for about 60–90 seconds, until bubbles form and the bottom develops dark brown or charred spots.
+                    </li>
+
+                    <li>
+                        Flip and cook another 30–60 seconds. You want some nice blistering and char without drying the naan out.
+                    </li>
+
+                    <li>
+                        Finish: Brush immediately with a little olive oil and sprinkle with cilantro and a tiny pinch of salt.
+                    </li>
                 </ol>
+
             </section>
+
         </div>
+
     </main>
+
 
     <footer>
         <p>K's Kitchen</p>
     </footer>
+
 </body>
 </html>

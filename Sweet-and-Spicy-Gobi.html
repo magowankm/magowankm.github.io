@@ -57,10 +57,19 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
+        /* Recipe Header */
         .recipe-header {
             background-color: #b45f06;
             color: white;
-            padding: 52px 40px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
         }
 
         .recipe-header p {
@@ -84,6 +93,17 @@
             line-height: 1.6;
         }
 
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
         .recipe-layout {
             display: grid;
             grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
@@ -133,9 +153,9 @@
             margin: 0 auto;
             color: #666;
             font-size: 0.9rem;
-            text-align: center;
         }
 
+        /* Mobile */
         @media (max-width: 700px) {
             body {
                 padding: 10px;
@@ -151,6 +171,17 @@
                 padding: 30px 24px;
             }
 
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
             .recipe-layout {
                 grid-template-columns: 1fr;
             }
@@ -162,24 +193,58 @@
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <a class="logo" href="index.html">K's Kitchen</a>
-        <a class="back-link" href="index.html?cuisine=indian">Back to Indian recipes</a>
+
+        <a class="back-link" href="index.html?cuisine=indian">
+            Back to Indian recipes
+        </a>
     </header>
 
+
     <main>
+
+        <!-- Recipe Header -->
         <section class="recipe-header">
-            <p style="text-transform: none;">Indian Cuisine</p>
-            <h1>Sweet and Spicy Gobi</h1>
-            <p class="description" style="text-transform: none;">
-                Tender roasted cauliflower coated in a savory tomato-spice mixture with a hint of sweetness and bright lemon.
-            </p>
+
+            <div class="recipe-header-content">
+
+                <p style="text-transform: none;">
+                    Indian Cuisine
+                </p>
+
+                <h1>
+                    Sweet and Spicy Gobi
+                </h1>
+
+                <p class="description" style="text-transform: none;">
+                    Tender roasted cauliflower coated in a savory tomato-spice mixture with a hint of sweetness and bright lemon.
+                </p>
+
+            </div>
+
+
+            <!-- Recipe Image -->
+            <img
+                class="recipe-header-image"
+                src="Sweet-and-Spicy-Gobi.jpg"
+                alt="Sweet and Spicy Gobi"
+            >
+
         </section>
 
+
+        <!-- Recipe Content -->
         <div class="recipe-layout">
+
+            <!-- Ingredients -->
             <aside class="recipe-sidebar">
+
                 <h2>Ingredients</h2>
+
                 <ul>
                     <li>1 whole head cauliflower (cut into medium florets)</li>
                     <li>2 tbsp avocado oil or olive oil</li>
@@ -191,7 +256,9 @@
                     <li>Fresh lemon juice (for finishing)</li>
                 </ul>
 
+
                 <h2>Spices</h2>
+
                 <ul class="spice-list">
                     <li>1 tsp cumin seeds</li>
                     <li>1 tsp turmeric</li>
@@ -201,28 +268,67 @@
                     <li>Salt (to taste)</li>
                     <li>1/2 tsp paprika (optional, for color)</li>
                 </ul>
+
             </aside>
 
+
+            <!-- Instructions -->
             <section class="recipe-instructions">
+
                 <h2>Instructions</h2>
+
                 <ol>
-                    <li>Preheat the oven to 425°F.</li>
-                    <li>Toss the cauliflower florets with 1 tbsp oil, a pinch of salt, and a little turmeric. Roast for 20–25 minutes, until browned around the edges.</li>
-                    <li>Heat the remaining 1 tbsp oil in a large skillet over medium heat. Add the cumin seeds and cook for about 30 seconds, until fragrant.</li>
-                    <li>Add the onion and cook for 5–7 minutes, until softened and lightly golden.</li>
-                    <li>Add the garlic and ginger and cook for 1–2 minutes.</li>
-                    <li>Add the turmeric, coriander powder, chili powder, and sugar. Stir for about 30 seconds.</li>
-                    <li>Add the tomatoes and salt. Cook for 5–8 minutes, stirring occasionally, until the tomatoes break down and the mixture becomes thick.</li>
-                    <li>Add the roasted cauliflower and toss thoroughly to coat. Cover and cook over low heat for 5–7 minutes.</li>
-                    <li>Remove from heat and finish with fresh cilantro and a squeeze of lemon juice. Taste and adjust the salt, chili, or lemon as needed.</li>
-                    <li>Serve warm as a side dish or alongside rice, naan, or your favorite Indian-inspired main course.</li>
+                    <li>
+                        Preheat the oven to 425°F.
+                    </li>
+
+                    <li>
+                        Toss the cauliflower florets with 1 tbsp oil, a pinch of salt, and a little turmeric. Roast for 20–25 minutes, until browned around the edges.
+                    </li>
+
+                    <li>
+                        Heat the remaining 1 tbsp oil in a large skillet over medium heat. Add the cumin seeds and cook for about 30 seconds, until fragrant.
+                    </li>
+
+                    <li>
+                        Add the onion and cook for 5–7 minutes, until softened and lightly golden.
+                    </li>
+
+                    <li>
+                        Add the garlic and ginger and cook for 1–2 minutes.
+                    </li>
+
+                    <li>
+                        Add the turmeric, coriander powder, chili powder, and sugar. Stir for about 30 seconds.
+                    </li>
+
+                    <li>
+                        Add the tomatoes and salt. Cook for 5–8 minutes, stirring occasionally, until the tomatoes break down and the mixture becomes thick.
+                    </li>
+
+                    <li>
+                        Add the roasted cauliflower and toss thoroughly to coat. Cover and cook over low heat for 5–7 minutes.
+                    </li>
+
+                    <li>
+                        Remove from heat and finish with fresh cilantro and a squeeze of lemon juice. Taste and adjust the salt, chili, or lemon as needed.
+                    </li>
+
+                    <li>
+                        Serve warm as a side dish or alongside rice, naan, or your favorite Indian-inspired main course.
+                    </li>
                 </ol>
+
             </section>
+
         </div>
+
     </main>
+
 
     <footer>
         <p>K's Kitchen</p>
     </footer>
+
 </body>
 </html>
