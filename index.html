@@ -51,6 +51,60 @@
             gap: 8px;
             margin-left: auto;
             margin-right: 16px;
+            position: relative;
+        }
+
+        .search-suggestions {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: min(42vw, 360px);
+            max-height: 320px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #e2e2e2;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+            z-index: 200;
+        }
+
+        .search-suggestions.is-visible {
+            display: block;
+        }
+
+        .search-suggestion {
+            display: block;
+            width: 100%;
+            padding: 11px 13px;
+            border: 0;
+            border-bottom: 1px solid #eeeeee;
+            background: white;
+            color: #222;
+            text-align: left;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .search-suggestion:last-child {
+            border-bottom: 0;
+        }
+
+        .search-suggestion:hover,
+        .search-suggestion.is-active {
+            background: #f5f5f5;
+        }
+
+        .search-suggestion-name {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .search-suggestion-meta {
+            display: block;
+            color: #777;
+            font-size: 0.82rem;
         }
 
         .header-search input {
@@ -414,6 +468,10 @@
                 width: 100%;
             }
 
+            .search-suggestions {
+                width: 100%;
+            }
+
             .cuisine-banner {
                 min-height: 320px;
             }
@@ -452,8 +510,18 @@
 
         <form class="header-search" action="index.html" method="get" role="search">
             <label for="site-search" class="sr-only">Search recipes</label>
-            <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
+            <input
+                id="site-search"
+                name="search"
+                type="search"
+                placeholder="Search recipes"
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="search-suggestions"
+                aria-expanded="false"
+            >
             <button type="submit">Search</button>
+            <div id="search-suggestions" class="search-suggestions" role="listbox"></div>
         </form>
 
         <!-- Hover Menu -->
@@ -725,6 +793,143 @@
                     cuisineKey
                 }))
             );
+
+
+        /* Search autocomplete */
+
+        const searchInput = document.getElementById("site-search");
+        const searchSuggestions = document.getElementById("search-suggestions");
+        let activeSuggestionIndex = -1;
+        let currentSuggestions = [];
+
+        function getRecipeMatches(value) {
+            const query = value.trim().toLowerCase();
+
+            if (!query) {
+                return [];
+            }
+
+            return allRecipes
+                .filter((recipe) =>
+                    `${recipe.name} ${recipe.description} ${recipe.cuisine}`
+                        .toLowerCase()
+                        .includes(query)
+                )
+                .sort((a, b) => {
+                    const aName = a.name.toLowerCase();
+                    const bName = b.name.toLowerCase();
+                    const aStarts = aName.startsWith(query) ? 0 : 1;
+                    const bStarts = bName.startsWith(query) ? 0 : 1;
+
+                    return aStarts - bStarts || a.name.localeCompare(b.name);
+                })
+                .slice(0, 6);
+        }
+
+        function hideSearchSuggestions() {
+            searchSuggestions.classList.remove("is-visible");
+            searchInput.setAttribute("aria-expanded", "false");
+            activeSuggestionIndex = -1;
+        }
+
+        function goToRecipe(recipe) {
+            if (recipe.href) {
+                window.location.href = recipe.href;
+            }
+            else {
+                window.location.href = `index.html?search=${encodeURIComponent(recipe.name)}`;
+            }
+        }
+
+        function renderSearchSuggestions() {
+            currentSuggestions = getRecipeMatches(searchInput.value);
+            activeSuggestionIndex = -1;
+
+            if (!currentSuggestions.length) {
+                hideSearchSuggestions();
+                searchSuggestions.innerHTML = "";
+                return;
+            }
+
+            searchSuggestions.innerHTML = currentSuggestions.map((recipe, index) => `
+                <button
+                    type="button"
+                    class="search-suggestion"
+                    role="option"
+                    data-index="${index}"
+                    aria-selected="false"
+                >
+                    <span class="search-suggestion-name">${recipe.name}</span>
+                    <span class="search-suggestion-meta">${recipe.cuisine}</span>
+                </button>
+            `).join("");
+
+            searchSuggestions.classList.add("is-visible");
+            searchInput.setAttribute("aria-expanded", "true");
+        }
+
+        function updateActiveSuggestion() {
+            const options = searchSuggestions.querySelectorAll(".search-suggestion");
+
+            options.forEach((option, index) => {
+                const isActive = index === activeSuggestionIndex;
+                option.classList.toggle("is-active", isActive);
+                option.setAttribute("aria-selected", String(isActive));
+            });
+        }
+
+        searchInput.addEventListener("input", renderSearchSuggestions);
+
+        searchInput.addEventListener("focus", () => {
+            if (searchInput.value.trim()) {
+                renderSearchSuggestions();
+            }
+        });
+
+        searchInput.addEventListener("keydown", (event) => {
+            if (!currentSuggestions.length || !searchSuggestions.classList.contains("is-visible")) {
+                return;
+            }
+
+            if (event.key === "ArrowDown") {
+                event.preventDefault();
+                activeSuggestionIndex = (activeSuggestionIndex + 1) % currentSuggestions.length;
+                updateActiveSuggestion();
+            }
+            else if (event.key === "ArrowUp") {
+                event.preventDefault();
+                activeSuggestionIndex =
+                    (activeSuggestionIndex - 1 + currentSuggestions.length) % currentSuggestions.length;
+                updateActiveSuggestion();
+            }
+            else if (event.key === "Enter" && activeSuggestionIndex >= 0) {
+                event.preventDefault();
+                goToRecipe(currentSuggestions[activeSuggestionIndex]);
+            }
+            else if (event.key === "Escape") {
+                hideSearchSuggestions();
+            }
+        });
+
+        searchSuggestions.addEventListener("click", (event) => {
+            const option = event.target.closest(".search-suggestion");
+
+            if (!option) {
+                return;
+            }
+
+            const recipe = currentSuggestions[Number(option.dataset.index)];
+
+            if (recipe) {
+                goToRecipe(recipe);
+            }
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!event.target.closest(".header-search")) {
+                hideSearchSuggestions();
+            }
+        });
 
         const recipeCard = (recipe) => `
             <a class="recipe-card" href="${recipe.href || '#'}">
