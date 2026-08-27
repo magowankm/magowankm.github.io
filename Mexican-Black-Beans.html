@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mexican Black Beans | K's Kitchen</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            color: #222;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            border-radius: 14px;
+            padding: 18px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .header-search input {
+            width: min(30vw, 240px);
+            padding: 10px 12px;
+            border: 1px solid #d8d8d8;
+            border-radius: 8px;
+            color: #222;
+            font: inherit;
+        }
+
+        .header-search button {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            background-color: #222;
+            color: white;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .back-link {
+            color: #a63d40;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Recipe Header */
+        .recipe-header {
+            background-color: #a63d40;
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
+        }
+
+        .recipe-header p {
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .recipe-header h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1;
+        }
+
+        .recipe-header .description {
+            max-width: 680px;
+            margin-top: 18px;
+            color: #fff5e8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
+        .recipe-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+            gap: 0;
+        }
+
+        .recipe-sidebar,
+        .recipe-instructions {
+            padding: 38px 40px 46px;
+        }
+
+        .recipe-sidebar {
+            background-color: #ffece8;
+            border-right: 1px solid #eadbc7;
+        }
+
+        .recipe-instructions {
+            background-color: white;
+        }
+
+        .recipe-layout h2 {
+            margin-bottom: 20px;
+            color: #a63d40;
+            font-size: 1.55rem;
+        }
+
+        .recipe-layout h2:not(:first-child) {
+            margin-top: 34px;
+        }
+
+        ul,
+        ol {
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 13px;
+            line-height: 1.55;
+        }
+
+        .spice-list li {
+            margin-bottom: 11px;
+        }
+
+        footer {
+            max-width: 1100px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 15px 18px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .header-search {
+                order: 3;
+                width: 100%;
+                margin: 0;
+            }
+
+            .header-search input {
+                width: 100%;
+            }
+
+            .recipe-header,
+            .recipe-sidebar,
+            .recipe-instructions {
+                padding: 30px 24px;
+            }
+
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            .recipe-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #eadbc7;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="index.html">K's Kitchen</a>
+
+        <form class="header-search" action="index.html" method="get" role="search">
+            <label for="site-search" class="sr-only">Search recipes</label>
+            <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+
+        <a class="back-link" href="index.html?cuisine=mexican">
+            Back to Mexican recipes
+        </a>
+    </header>
+
+
+    <main>
+
+        <!-- Recipe Header -->
+        <section class="recipe-header">
+
+            <div class="recipe-header-content">
+
+                <p style="text-transform: none;">
+                    Mexican Cuisine
+                </p>
+
+                <h1>
+                    Mexican Black Beans
+                </h1>
+
+                <p class="description" style="text-transform: none;">
+                    Smoky, creamy black beans simmered with Mexican-inspired spices, garlic, onion, and lime.
+                </p>
+
+            </div>
+
+
+            <!-- Recipe Image -->
+            <img
+                class="recipe-header-image"
+                src="Mexican-Black-Beans.jpg"
+                alt="Mexican Black Beans"
+            >
+
+        </section>
+
+
+        <!-- Recipe Content -->
+        <div class="recipe-layout">
+
+            <!-- Ingredients -->
+            <aside class="recipe-sidebar">
+
+                <h2>Ingredients</h2>
+
+                <ul>
+                    <li>1 can (15 oz) black beans, drained and rinsed</li>
+                    <li>½ tbsp avocado oil or olive oil</li>
+                    <li>¼ medium yellow or white onion, finely diced</li>
+                    <li>2 cloves garlic, minced</li>
+                    <li>¼–½ jalapeño, finely diced, optional</li>
+                    <li>⅓ cup chicken broth or water</li>
+                    <li>1½–2 tsp fresh lime juice</li>
+                    <li>1 tbsp chopped cilantro, optional</li>
+                </ul>
+
+                <h2>Spices</h2>
+
+                <ul class="spice-list">
+                    <li>½ tsp ground cumin</li>
+                    <li>½ tsp chili powder</li>
+                    <li>¼ tsp smoked paprika</li>
+                    <li>¼ tsp dried oregano</li>
+                    <li>⅛ tsp ground coriander</li>
+                    <li>⅛ tsp onion powder</li>
+                    <li>Pinch of cayenne, optional</li>
+                    <li>¼ tsp kosher salt, plus more to taste</li>
+                    <li>⅛ tsp black pepper</li>
+                </ul>
+
+            </aside>
+
+
+            <!-- Instructions -->
+            <section class="recipe-instructions">
+
+                <h2>Instructions</h2>
+
+                <ol>
+                    <li>Heat the oil in a small saucepan over medium heat.</li>
+                    <li>Add the onion and jalapeño and cook for 3–4 minutes, until softened.</li>
+                    <li>Add the garlic and cook for about 30 seconds.</li>
+                    <li>Add the cumin, chili powder, smoked paprika, oregano, coriander, onion powder, cayenne, salt, and black pepper. Stir and toast the spices for about 30 seconds.</li>
+                    <li>Add the black beans and ⅓ cup chicken broth or water. Stir well and bring to a gentle simmer.</li>
+                    <li>Reduce the heat to medium-low and simmer uncovered for 10–12 minutes, stirring occasionally.</li>
+                    <li>Mash about ¼ of the beans with the back of a spoon or potato masher, then stir them back into the pot.</li>
+                    <li>Simmer for another 3–5 minutes, until the liquid has thickened and the beans are creamy. Add a splash of broth or water if they become too thick.</li>
+                    <li>Remove from the heat and stir in 1½ teaspoons lime juice. Taste and add the remaining lime juice if you want more brightness.</li>
+                    <li>Stir in the cilantro, if using, and adjust the salt to taste.</li>
+                </ol>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>K's Kitchen</p>
+    </footer>
+
+</body>
+</html>
