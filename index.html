@@ -397,6 +397,167 @@
             line-height: 1.5;
         }
 
+
+        /* =========================
+           RECIPE FILTERS
+        ========================= */
+
+        .filter-section {
+            display: none;
+            background: white;
+            padding: 26px 24px 4px;
+        }
+
+        .filter-header {
+            margin-bottom: 18px;
+        }
+
+        .filter-header h2 {
+            font-size: 1.55rem;
+            margin-bottom: 6px;
+            color: #222;
+        }
+
+        .filter-header p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 9px;
+            color: #777;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .category-button {
+            border: 1px solid #d7d7d7;
+            background: white;
+            color: #333;
+            padding: 9px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .category-button:hover {
+            background: #f4f4f4;
+        }
+
+        .category-button.active {
+            background: #222;
+            border-color: #222;
+            color: white;
+        }
+
+        .secondary-filters {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(150px, 1fr)) auto;
+            gap: 12px;
+            align-items: end;
+            padding: 16px;
+            border-radius: 12px;
+            background: #f6f6f6;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #666;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px 11px;
+            border: 1px solid #d5d5d5;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            font: inherit;
+        }
+
+        .clear-filters {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .clear-filters:hover {
+            background: #444;
+        }
+
+        .filter-results {
+            margin-top: 13px;
+            color: #666;
+            font-size: 0.88rem;
+        }
+
+        .recipe-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .recipe-tag {
+            border: 0;
+            border-radius: 999px;
+            padding: 5px 9px;
+            background: #f1f1f1;
+            color: #555;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .recipe-tag:hover {
+            background: #dedede;
+            color: #222;
+        }
+
+        .recipe-tag.category-tag {
+            background: #f5e5d2;
+            color: #8a4800;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            padding: 36px 18px;
+            border-radius: 12px;
+            background: white;
+            text-align: center;
+            color: #666;
+        }
+
+        .no-results h3 {
+            margin-bottom: 7px;
+            color: #222;
+        }
+
         /* =========================
            FOOTER
         ========================= */
@@ -489,6 +650,18 @@
 
             .recipe-section {
                 padding: 24px 14px 35px;
+            }
+
+            .filter-section {
+                padding: 22px 14px 2px;
+            }
+
+            .secondary-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .clear-filters {
+                width: 100%;
             }
 
             footer {
@@ -622,6 +795,50 @@
 
 
         <!-- =========================
+             RECIPE FILTERS
+        ========================= -->
+
+        <section id="filter-section" class="filter-section">
+            <div class="filter-header">
+                <h2>Browse Recipes</h2>
+                <p>Filter by category, protein, cooking method, or dietary preference.</p>
+            </div>
+
+            <span class="filter-label">Category</span>
+            <div id="category-buttons" class="category-buttons"></div>
+
+            <div class="secondary-filters">
+                <div class="filter-group">
+                    <label for="protein-filter">Protein</label>
+                    <select id="protein-filter">
+                        <option value="all">All Proteins</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="method-filter">Cooking Method</label>
+                    <select id="method-filter">
+                        <option value="all">All Methods</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="diet-filter">Dietary</label>
+                    <select id="diet-filter">
+                        <option value="all">All</option>
+                    </select>
+                </div>
+
+                <button id="clear-filters" class="clear-filters" type="button">
+                    Clear Filters
+                </button>
+            </div>
+
+            <div id="filter-results" class="filter-results"></div>
+        </section>
+
+
+        <!-- =========================
              RECIPES
         ========================= -->
 
@@ -678,104 +895,337 @@
 
     <script>
 
+        const universalCategories = [
+            "All",
+            "Mains",
+            "Soups, Stews & Saucy Dishes",
+            "Vegetables & Sides",
+            "Rice & Grains",
+            "Breads",
+            "Sauces & Add-Ons",
+            "Desserts",
+            "Drinks"
+        ];
+
         const cuisines = {
 
             american: {
                 name: "American",
-                description:
-                    "Comfort food, classic favorites, and modern dishes inspired by the diverse flavors of American cooking.",
+                description: "Comfort food, classic favorites, and modern dishes inspired by the diverse flavors of American cooking.",
                 colorClass: "american",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Classic Burger", description: "A juicy, flavorful burger with crisp toppings and a toasted bun." },
-                    { name: "Mac and Cheese", description: "Creamy, comforting baked pasta with a golden cheese topping." },
-                    { name: "Buttermilk Pancakes", description: "Light, fluffy pancakes made for slow weekend mornings." }
+                    {
+                        name: "Classic Burger",
+                        description: "A juicy, flavorful burger with crisp toppings and a toasted bun.",
+                        category: "Mains",
+                        protein: "Beef",
+                        method: "Grill",
+                        diet: [],
+                        tags: ["Main", "Beef", "Grill", "High Protein"]
+                    },
+                    {
+                        name: "Mac and Cheese",
+                        description: "Creamy, comforting baked pasta with a golden cheese topping.",
+                        category: "Mains",
+                        protein: "Vegetarian",
+                        method: "Oven",
+                        diet: ["Vegetarian"],
+                        tags: ["Main", "Vegetarian", "Oven"]
+                    },
+                    {
+                        name: "Buttermilk Pancakes",
+                        description: "Light, fluffy pancakes made for slow weekend mornings.",
+                        category: "Mains",
+                        protein: "Vegetarian",
+                        method: "Stovetop",
+                        diet: ["Vegetarian"],
+                        tags: ["Main", "Breakfast", "Vegetarian", "Stovetop"]
+                    }
                 ]
             },
 
             chinese: {
                 name: "Chinese",
-                description:
-                    "Flavorful dishes built around savory sauces, aromatic spices, fresh vegetables, and the rich regional traditions of Chinese cuisine.",
+                description: "Flavorful dishes built around savory sauces, aromatic spices, fresh vegetables, and the rich regional traditions of Chinese cuisine.",
                 colorClass: "chinese",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Vegetable Stir-Fry", description: "Crisp vegetables tossed in a savory sauce for a quick, colorful meal." },
-                    { name: "Fried Rice", description: "Steamed rice, vegetables, and aromatics brought together in a hot wok." },
-                    { name: "Pork Dumplings", description: "Tender filled dumplings served with a bright, savory dipping sauce." }
+                    {
+                        name: "Vegetable Stir-Fry",
+                        description: "Crisp vegetables tossed in a savory sauce for a quick, colorful meal.",
+                        category: "Vegetables & Sides",
+                        protein: "Vegetarian",
+                        method: "Stovetop",
+                        diet: ["Vegetarian"],
+                        tags: ["Vegetables & Sides", "Vegetarian", "Stovetop", "Stir-Fry"]
+                    },
+                    {
+                        name: "Fried Rice",
+                        description: "Steamed rice, vegetables, and aromatics brought together in a hot wok.",
+                        category: "Rice & Grains",
+                        protein: "Vegetarian",
+                        method: "Stovetop",
+                        diet: ["Vegetarian"],
+                        tags: ["Rice & Grains", "Vegetarian", "Stovetop"]
+                    },
+                    {
+                        name: "Pork Dumplings",
+                        description: "Tender filled dumplings served with a bright, savory dipping sauce.",
+                        category: "Mains",
+                        protein: "Pork",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Main", "Pork", "Stovetop", "Dumplings"]
+                    }
                 ]
             },
 
             greek: {
                 name: "Greek",
-                description:
-                    "Fresh, bright Mediterranean flavors featuring herbs, grilled proteins, vegetables, grains, and vibrant sauces.",
+                description: "Fresh, bright Mediterranean flavors featuring herbs, grilled proteins, vegetables, grains, and vibrant sauces.",
                 colorClass: "greek",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Greek Salad", description: "Crisp vegetables, olives, herbs, and a bright Greek-inspired dressing.", href: "Greek-Salad.html", image: "Greek-Salad.jpg" },
-                    { name: "Chicken Souvlaki", description: "Herb-marinated chicken grilled until tender and served with lemon.", image: "Chicken-Souvlaki.jpg"  },
-                    { name: "Tzatziki", description: "Cool, creamy yogurt dip with cucumber, garlic, lemon, and herbs.", image: "Tzatziki.jpg"  }
+                    {
+                        name: "Greek Salad",
+                        description: "Crisp vegetables, olives, herbs, and a bright Greek-inspired dressing.",
+                        href: "Greek-Salad.html",
+                        image: "Greek-Salad.jpg",
+                        category: "Vegetables & Sides",
+                        protein: "Vegetarian",
+                        method: "No Cook",
+                        diet: ["Vegetarian"],
+                        tags: ["Vegetables & Sides", "Vegetarian", "No Cook", "Salad"]
+                    },
+                    {
+                        name: "Chicken Souvlaki",
+                        description: "Herb-marinated chicken grilled until tender and served with lemon.",
+                        image: "Chicken-Souvlaki.jpg",
+                        category: "Mains",
+                        protein: "Chicken",
+                        method: "Grill",
+                        diet: [],
+                        tags: ["Main", "Chicken", "Grill", "High Protein"]
+                    },
+                    {
+                        name: "Tzatziki",
+                        description: "Cool, creamy yogurt dip with cucumber, garlic, lemon, and herbs.",
+                        image: "Tzatziki.jpg",
+                        category: "Sauces & Add-Ons",
+                        protein: "Vegetarian",
+                        method: "No Cook",
+                        diet: ["Vegetarian"],
+                        tags: ["Sauces & Add-Ons", "Vegetarian", "No Cook", "Dip"]
+                    }
                 ]
             },
 
             indian: {
                 name: "Indian",
-                description:
-                    "Bold and aromatic recipes featuring layered spices, rich sauces, grilled proteins, vegetables, and traditional Indian flavors.",
+                description: "Bold and aromatic recipes featuring layered spices, rich sauces, grilled proteins, vegetables, and traditional Indian flavors.",
                 colorClass: "indian",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Beef Keema", description: "Savory ground beef simmered with tomatoes, peas, ginger, garlic, and warming Indian spices.", href: "Beef-Keema.html", image: "Beef-Keema.jpg"},
-                    { name: "Sweet and Spicy Gobi", description: "Tender cauliflower cooked with tomatoes, herbs, and a fragrant spice blend.", href: "Sweet-and-Spicy-Gobi.html", image: "Sweet-and-Spicy-Gobi.jpg" },
-                    { name: "Tandoori Chicken", description: "Tender and flavorful chicken marinated in a blend of yogurt and spices, then grilled to perfection.", href: "Tandoori-Chicken.html", image: "Tandoori-Chicken.jpg" },
-                    { name: "Coconut Chickpea Curry", description: "A creamy and aromatic curry made with coconut milk, chickpeas, and traditional Indian spices.", href: "Coconut-Chickpea-Curry.html", image: "Coconut-Chickpea-Curry.jpg" },
-                    { name: "Garlic Naan", description: "Soft, blistered flatbread finished with garlic and fresh herbs.", href: "Garlic-Naan.html", image: "Garlic-Naan.jpg"  }
+                    {
+                        name: "Beef Keema",
+                        description: "Savory ground beef simmered with tomatoes, peas, ginger, garlic, and warming Indian spices.",
+                        href: "Beef-Keema.html",
+                        image: "Beef-Keema.jpg",
+                        category: "Mains",
+                        protein: "Beef",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Main", "Beef", "Stovetop", "High Protein"]
+                    },
+                    {
+                        name: "Sweet and Spicy Gobi",
+                        description: "Tender cauliflower cooked with tomatoes, herbs, and a fragrant spice blend.",
+                        href: "Sweet-and-Spicy-Gobi.html",
+                        image: "Sweet-and-Spicy-Gobi.jpg",
+                        category: "Vegetables & Sides",
+                        protein: "Vegetarian",
+                        method: "Stovetop",
+                        diet: ["Vegetarian", "Dairy Free"],
+                        tags: ["Vegetables & Sides", "Vegetarian", "Dairy Free", "Stovetop"]
+                    },
+                    {
+                        name: "Tandoori Chicken",
+                        description: "Tender and flavorful chicken marinated in a blend of yogurt and spices, then cooked until deeply seasoned and juicy.",
+                        href: "Tandoori-Chicken.html",
+                        image: "Tandoori-Chicken.jpg",
+                        category: "Mains",
+                        protein: "Chicken",
+                        method: "Oven",
+                        diet: [],
+                        tags: ["Main", "Chicken", "Oven", "High Protein"]
+                    },
+                    {
+                        name: "Coconut Chickpea Curry",
+                        description: "A creamy and aromatic curry made with coconut milk, chickpeas, and traditional Indian spices.",
+                        href: "Coconut-Chickpea-Curry.html",
+                        image: "Coconut-Chickpea-Curry.jpg",
+                        category: "Soups, Stews & Saucy Dishes",
+                        protein: "Vegetarian",
+                        method: "Stovetop",
+                        diet: ["Vegetarian", "Dairy Free"],
+                        tags: ["Soups, Stews & Saucy Dishes", "Vegetarian", "Dairy Free", "Stovetop", "Curry"]
+                    },
+                    {
+                        name: "Garlic Naan",
+                        description: "Soft, blistered flatbread finished with garlic and fresh herbs.",
+                        href: "Garlic-Naan.html",
+                        image: "Garlic-Naan.jpg",
+                        category: "Breads",
+                        protein: "None",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Bread", "Side", "Stovetop"]
+                    }
                 ]
             },
 
             italian: {
                 name: "Italian",
-                description:
-                    "Simple, flavorful cooking centered around quality ingredients, fresh herbs, pasta, meats, vegetables, and classic Italian techniques.",
+                description: "Simple, flavorful cooking centered around quality ingredients, fresh herbs, pasta, meats, vegetables, and classic Italian techniques.",
                 colorClass: "italian",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Spaghetti Carbonara", description: "Silky pasta with egg, cheese, pepper, and crisp cured pork." },
-                    { name: "Margherita Pizza", description: "A thin crust topped with tomato, mozzarella, basil, and olive oil." },
-                    { name: "Panzanella", description: "Rustic bread salad with ripe tomatoes, herbs, and a tangy dressing." },
-                    { name: "Bolognese", description: "A rich and hearty meat sauce perfect for pasta.", href: "Bolognese.html", image: "Bolognese.jpg" }
+                    {
+                        name: "Spaghetti Carbonara",
+                        description: "Silky pasta with egg, cheese, pepper, and crisp cured pork.",
+                        category: "Mains",
+                        protein: "Pork",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Main", "Pork", "Stovetop", "Pasta"]
+                    },
+                    {
+                        name: "Margherita Pizza",
+                        description: "A thin crust topped with tomato, mozzarella, basil, and olive oil.",
+                        category: "Mains",
+                        protein: "Vegetarian",
+                        method: "Oven",
+                        diet: ["Vegetarian"],
+                        tags: ["Main", "Vegetarian", "Oven", "Pizza"]
+                    },
+                    {
+                        name: "Panzanella",
+                        description: "Rustic bread salad with ripe tomatoes, herbs, and a tangy dressing.",
+                        category: "Vegetables & Sides",
+                        protein: "Vegetarian",
+                        method: "No Cook",
+                        diet: ["Vegetarian"],
+                        tags: ["Vegetables & Sides", "Vegetarian", "No Cook", "Salad"]
+                    },
+                    {
+                        name: "Bolognese",
+                        description: "A rich and hearty meat sauce perfect for pasta.",
+                        href: "Bolognese.html",
+                        image: "Bolognese.jpg",
+                        category: "Sauces & Add-Ons",
+                        protein: "Meat",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Sauces & Add-Ons", "Meat", "Stovetop", "Pasta Sauce"]
+                    }
                 ]
             },
 
             japanese: {
                 name: "Japanese",
-                description:
-                    "Balanced and refined dishes emphasizing fresh ingredients, umami-rich flavors, rice, noodles, vegetables, and traditional Japanese techniques.",
+                description: "Balanced and refined dishes emphasizing fresh ingredients, umami-rich flavors, rice, noodles, vegetables, and traditional Japanese techniques.",
                 colorClass: "japanese",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Chicken Teriyaki", description: "Tender chicken glazed with a glossy, sweet-savory teriyaki sauce." },
-                    { name: "Miso Soup", description: "A soothing broth with miso, tofu, seaweed, and fresh scallions." },
-                    { name: "Vegetable Sushi", description: "Seasoned rice and crisp vegetables rolled into neat, shareable pieces." }
+                    {
+                        name: "Chicken Teriyaki",
+                        description: "Tender chicken glazed with a glossy, sweet-savory teriyaki sauce.",
+                        category: "Mains",
+                        protein: "Chicken",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Main", "Chicken", "Stovetop", "High Protein"]
+                    },
+                    {
+                        name: "Miso Soup",
+                        description: "A soothing broth with miso, tofu, seaweed, and fresh scallions.",
+                        category: "Soups, Stews & Saucy Dishes",
+                        protein: "Tofu",
+                        method: "Stovetop",
+                        diet: [],
+                        tags: ["Soups, Stews & Saucy Dishes", "Tofu", "Stovetop", "Soup"]
+                    },
+                    {
+                        name: "Vegetable Sushi",
+                        description: "Seasoned rice and crisp vegetables rolled into neat, shareable pieces.",
+                        category: "Mains",
+                        protein: "Vegetarian",
+                        method: "No Cook",
+                        diet: ["Vegetarian"],
+                        tags: ["Main", "Vegetarian", "No Cook", "Rice"]
+                    }
                 ]
             },
 
             mexican: {
                 name: "Mexican",
-                description:
-                    "Vibrant and bold dishes featuring fresh ingredients, rich sauces, grilled proteins, and traditional Mexican flavors.",
+                description: "Vibrant and bold dishes featuring fresh ingredients, rich sauces, grilled proteins, and traditional Mexican flavors.",
                 colorClass: "mexican",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Honey Chipotle Chicken", description: "Soft tortillas filled with seasoned chicken, fresh toppings, and a squeeze of lime.", href: "Honey-Chipotle-Chicken.html", image: "Honey-Chipotle-Chicken.jpg" },
-                    { name: "Guacamole", description: "Creamy avocado dip with lime, cilantro, and a hint of spice.", href: "Guacamole.html", image: "Guacamole.jpg" },
-                    { name: "Mexican Black Beans", description: "Smoky, creamy black beans simmered with Mexican-inspired spices, garlic, onion, and lime.", href: "Mexican-Black-Beans.html", image: "Mexican-Black-Beans.jpg" }
+                    {
+                        name: "Honey Chipotle Chicken",
+                        description: "Soft tortillas filled with seasoned chicken, fresh toppings, and a squeeze of lime.",
+                        href: "Honey-Chipotle-Chicken.html",
+                        image: "Honey-Chipotle-Chicken.jpg",
+                        category: "Mains",
+                        protein: "Chicken",
+                        method: "Oven",
+                        diet: [],
+                        tags: ["Main", "Chicken", "Oven", "High Protein"]
+                    },
+                    {
+                        name: "Guacamole",
+                        description: "Creamy avocado dip with lime, cilantro, and a hint of spice.",
+                        href: "Guacamole.html",
+                        image: "Guacamole.jpg",
+                        category: "Sauces & Add-Ons",
+                        protein: "Vegetarian",
+                        method: "No Cook",
+                        diet: ["Vegetarian", "Dairy Free"],
+                        tags: ["Sauces & Add-Ons", "Vegetarian", "Dairy Free", "No Cook", "Dip"]
+                    },
+                    {
+                        name: "Mexican Black Beans",
+                        description: "Smoky, creamy black beans simmered with Mexican-inspired spices, garlic, onion, and lime.",
+                        href: "Mexican-Black-Beans.html",
+                        image: "Mexican-Black-Beans.jpg",
+                        category: "Vegetables & Sides",
+                        protein: "Vegetarian",
+                        method: "Stovetop",
+                        diet: ["Vegetarian", "Dairy Free"],
+                        tags: ["Vegetables & Sides", "Vegetarian", "Dairy Free", "Stovetop", "Beans"]
+                    }
                 ]
             },
-            
+
             moroccan: {
                 name: "Moroccan",
-                description:
-                    "Warm and aromatic dishes featuring complex spice blends, slow-cooked stews, tagines, and traditional Moroccan flavors.",
+                description: "Warm and aromatic dishes featuring complex spice blends, slow-cooked stews, tagines, and traditional Moroccan flavors.",
                 colorClass: "moroccan",
+                categories: universalCategories,
                 recipes: [
-                    { name: "Harissa Chicken", description: "Tender chicken slow-cooked with harissa sauce and a blend of aromatic spices.", image: "Harissa-Chicken.jpg"  },
-                    // { name: "Chicken Pastilla", description: "Flaky pastry filled with spiced chicken and almonds." },
-                    // { name: "Harira Soup", description: "A hearty soup with tomatoes, lentils, and a variety of spices." }
+                    {
+                        name: "Harissa Chicken",
+                        description: "Tender chicken slow-cooked with harissa sauce and a blend of aromatic spices.",
+                        image: "Harissa-Chicken.jpg",
+                        category: "Mains",
+                        protein: "Chicken",
+                        method: "Slow Cooker",
+                        diet: [],
+                        tags: ["Main", "Chicken", "Slow Cooker", "High Protein"]
+                    }
                 ]
             }
 
@@ -797,6 +1247,27 @@
 
         const recipeGrid =
             document.getElementById("recipe-grid");
+
+        const filterSection =
+            document.getElementById("filter-section");
+
+        const categoryButtons =
+            document.getElementById("category-buttons");
+
+        const proteinFilter =
+            document.getElementById("protein-filter");
+
+        const methodFilter =
+            document.getElementById("method-filter");
+
+        const dietFilter =
+            document.getElementById("diet-filter");
+
+        const clearFiltersButton =
+            document.getElementById("clear-filters");
+
+        const filterResults =
+            document.getElementById("filter-results");
 
 
         /* Read cuisine from URL */
@@ -836,7 +1307,7 @@
 
             return allRecipes
                 .filter((recipe) =>
-                    `${recipe.name} ${recipe.description} ${recipe.cuisine}`
+                    `${recipe.name} ${recipe.description} ${recipe.cuisine} ${recipe.category || ""} ${recipe.protein || ""} ${recipe.method || ""} ${(recipe.tags || []).join(" ")} ${(recipe.diet || []).join(" ")}`
                         .toLowerCase()
                         .includes(query)
                 )
@@ -956,20 +1427,178 @@
             }
         });
 
-        const recipeCard = (recipe) => `
-            <a class="recipe-card" href="${recipe.href || '#'}">
-                <div class="recipe-image">
-                    ${recipe.image
-                        ? `<img src="${recipe.image}" alt="${recipe.name}">`
-                        : "Add photo"}
-                </div>
+        const recipeCard = (recipe, showCuisine = false) => `
+            <article class="recipe-card">
+                <a href="${recipe.href || '#'}" style="text-decoration: none; color: inherit;">
+                    <div class="recipe-image">
+                        ${recipe.image
+                            ? `<img src="${recipe.image}" alt="${recipe.name}">`
+                            : "Add photo"}
+                    </div>
+                </a>
+
                 <div class="recipe-info">
-                    <h3>${recipe.name}</h3>
+                    <a href="${recipe.href || '#'}" style="text-decoration: none; color: inherit;">
+                        <h3>${recipe.name}</h3>
+                    </a>
+
                     <p>${recipe.description}</p>
-                    <p>${recipe.cuisine}</p>
+                    ${showCuisine && recipe.cuisine ? `<p>${recipe.cuisine}</p>` : ""}
+
+                    ${(recipe.tags || []).length ? `
+                        <div class="recipe-tags">
+                            ${(recipe.tags || []).map((tag) => `
+                                <button
+                                    type="button"
+                                    class="recipe-tag ${tag === recipe.category || tag === "Main" || tag === "Bread" ? "category-tag" : ""}"
+                                    data-tag="${tag}"
+                                >
+                                    ${tag}
+                                </button>
+                            `).join("")}
+                        </div>
+                    ` : ""}
                 </div>
-            </a>
+            </article>
         `;
+
+
+        let activeCategory = "All";
+
+        function uniqueValues(recipes, property) {
+            return [...new Set(
+                recipes.flatMap((recipe) => {
+                    const value = recipe[property];
+                    if (Array.isArray(value)) return value;
+                    return value ? [value] : [];
+                }).filter((value) => value && value !== "None")
+            )].sort();
+        }
+
+        function populateSelect(element, values, defaultLabel) {
+            element.innerHTML = `
+                <option value="all">${defaultLabel}</option>
+                ${values.map((value) => `<option value="${value}">${value}</option>`).join("")}
+            `;
+        }
+
+        function buildCuisineFilters(cuisine) {
+            activeCategory = "All";
+            filterSection.style.display = "block";
+
+            categoryButtons.innerHTML = cuisine.categories.map((category) => `
+                <button
+                    type="button"
+                    class="category-button ${category === "All" ? "active" : ""}"
+                    data-category="${category}"
+                >
+                    ${category}
+                </button>
+            `).join("");
+
+            populateSelect(proteinFilter, uniqueValues(cuisine.recipes, "protein"), "All Proteins");
+            populateSelect(methodFilter, uniqueValues(cuisine.recipes, "method"), "All Methods");
+            populateSelect(dietFilter, uniqueValues(cuisine.recipes, "diet"), "All");
+
+            updateFilteredRecipes();
+        }
+
+        function updateFilteredRecipes() {
+            if (!selectedCuisine || !cuisines[selectedCuisine]) return;
+
+            const recipes = cuisines[selectedCuisine].recipes;
+            const selectedProtein = proteinFilter.value;
+            const selectedMethod = methodFilter.value;
+            const selectedDiet = dietFilter.value;
+
+            const filteredRecipes = recipes.filter((recipe) => {
+                const matchesCategory = activeCategory === "All" || recipe.category === activeCategory;
+                const matchesProtein = selectedProtein === "all" || recipe.protein === selectedProtein;
+                const matchesMethod = selectedMethod === "all" || recipe.method === selectedMethod;
+                const matchesDiet = selectedDiet === "all" || (recipe.diet && recipe.diet.includes(selectedDiet));
+
+                return matchesCategory && matchesProtein && matchesMethod && matchesDiet;
+            });
+
+            recipeGrid.innerHTML = filteredRecipes.length
+                ? filteredRecipes.map((recipe) => recipeCard(recipe)).join("")
+                : `
+                    <div class="no-results">
+                        <h3>No recipes found</h3>
+                        <p>Try changing or clearing one of your filters.</p>
+                    </div>
+                `;
+
+            filterResults.textContent = `Showing ${filteredRecipes.length} of ${recipes.length} recipes`;
+        }
+
+        categoryButtons.addEventListener("click", (event) => {
+            const button = event.target.closest(".category-button");
+            if (!button) return;
+
+            activeCategory = button.dataset.category;
+
+            document.querySelectorAll(".category-button").forEach((item) => {
+                item.classList.toggle("active", item === button);
+            });
+
+            updateFilteredRecipes();
+        });
+
+        proteinFilter.addEventListener("change", updateFilteredRecipes);
+        methodFilter.addEventListener("change", updateFilteredRecipes);
+        dietFilter.addEventListener("change", updateFilteredRecipes);
+
+        clearFiltersButton.addEventListener("click", () => {
+            activeCategory = "All";
+            proteinFilter.value = "all";
+            methodFilter.value = "all";
+            dietFilter.value = "all";
+
+            document.querySelectorAll(".category-button").forEach((button) => {
+                button.classList.toggle("active", button.dataset.category === "All");
+            });
+
+            updateFilteredRecipes();
+        });
+
+        recipeGrid.addEventListener("click", (event) => {
+            const tagButton = event.target.closest(".recipe-tag");
+            if (!tagButton || !selectedCuisine || !cuisines[selectedCuisine]) return;
+
+            event.preventDefault();
+
+            const tag = tagButton.dataset.tag;
+            const cuisine = cuisines[selectedCuisine];
+
+            if (cuisine.categories.includes(tag)) {
+                activeCategory = tag;
+            }
+            else if (tag === "Main") {
+                activeCategory = "Mains";
+            }
+            else if (tag === "Bread") {
+                activeCategory = "Breads";
+            }
+            else if (tag === "Side") {
+                activeCategory = "Vegetables & Sides";
+            }
+            else if ([...proteinFilter.options].some((option) => option.value === tag)) {
+                proteinFilter.value = tag;
+            }
+            else if ([...methodFilter.options].some((option) => option.value === tag)) {
+                methodFilter.value = tag;
+            }
+            else if ([...dietFilter.options].some((option) => option.value === tag)) {
+                dietFilter.value = tag;
+            }
+
+            document.querySelectorAll(".category-button").forEach((button) => {
+                button.classList.toggle("active", button.dataset.category === activeCategory);
+            });
+
+            updateFilteredRecipes();
+        });
 
 
         /* Display selected cuisine */
@@ -981,7 +1610,7 @@
 
             const matchingRecipes =
                 allRecipes.filter((recipe) =>
-                    `${recipe.name} ${recipe.description} ${recipe.cuisine}`
+                    `${recipe.name} ${recipe.description} ${recipe.cuisine} ${recipe.category || ""} ${recipe.protein || ""} ${recipe.method || ""} ${(recipe.tags || []).join(" ")} ${(recipe.diet || []).join(" ")}`
                         .toLowerCase()
                         .includes(normalizedSearch)
                 );
@@ -993,7 +1622,7 @@
                 : "Try another recipe name, ingredient, or cuisine.";
             recipeSection.style.display = "block";
             recipeGrid.innerHTML = matchingRecipes.length
-                ? matchingRecipes.map(recipeCard).join("")
+                ? matchingRecipes.map((recipe) => recipeCard(recipe, true)).join("")
                 : "<p>No recipes matched your search.</p>";
             document.title = `Search | K's Kitchen`;
         }
@@ -1036,7 +1665,7 @@
 
             recipeSection.style.display = "block";
 
-            recipeGrid.innerHTML = cuisine.recipes.map(recipeCard).join("");
+            buildCuisineFilters(cuisine);
 
 
             /* Change browser title */
