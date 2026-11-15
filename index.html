@@ -184,11 +184,6 @@
             display: block;
         }
 
-        @media (min-width: 601px) {
-            .menu:hover .menu-content {
-                display: block;
-            }
-        }
 
         .menu-content a {
             display: block;
@@ -1695,6 +1690,12 @@
         function setMenuOpen(isOpen) {
             menu.classList.toggle("is-open", isOpen);
             menuButton.setAttribute("aria-expanded", String(isOpen));
+            if (!isOpen) {
+                const dinnerSection = menu.querySelector(".menu-subsection");
+                const dinnerToggle = menu.querySelector(".menu-section-toggle");
+                dinnerSection.classList.remove("is-expanded");
+                dinnerToggle.setAttribute("aria-expanded", "false");
+            }
         }
 
         menuButton.addEventListener("click", () => {
