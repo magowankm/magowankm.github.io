@@ -221,6 +221,12 @@
         .menu-section-toggle { text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 0; border-top: 1px solid #e5e5e5; background: white; color: #777; font: inherit; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; text-align: left; }
         .menu-section-toggle:hover, .menu-section-toggle:focus-visible { background: #f2f2f2; }
         .menu-section-toggle span { transition: transform .15s ease; }
+        .menu-section-static { cursor: default; }
+        .menu-section-static:hover { background: white; }
+        .menu-content .menu-section-link { padding: 12px 16px; font-size: .75rem; color: #777; }
+        @media (hover: hover) and (pointer: fine) {
+            .menu:hover .menu-content, .menu:focus-within .menu-content { display: block; }
+        }
         .menu-subitems { display: none; }
         .menu-subsection.is-expanded .menu-subitems { display: block; }
         .menu-subsection.is-expanded .menu-section-toggle span { transform: rotate(90deg); }
@@ -744,8 +750,8 @@
 
             <div id="menu-content" class="menu-content">
 
-                <div class="menu-section-title">Breakfast</div>
-                <div class="menu-section-title">Lunch</div>
+                <div class="menu-section-toggle menu-section-static">Breakfast</div>
+                <div class="menu-section-toggle menu-section-static">Lunch</div>
                 <div class="menu-subsection">
                     <button class="menu-section-toggle" type="button" aria-expanded="false" aria-controls="dinner-categories">Dinner <span aria-hidden="true">▸</span></button>
                     <div id="dinner-categories" class="menu-subitems">
@@ -759,7 +765,7 @@
                         <a class="menu-item" href="?cuisine=moroccan">Moroccan</a>
                     </div>
                 </div>
-                <a class="menu-section-toggle" href="index.html?search=Desserts">Desserts</a>
+                <a class="menu-section-toggle menu-section-link" href="index.html?search=Desserts">Desserts</a>
 
             </div>
 
