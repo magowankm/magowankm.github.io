@@ -333,6 +333,8 @@
         .mexican {
                     background-color: #006847;
                 }
+        .desserts { background-color: #8b4a63; }
+
         .moroccan {
             background-color: #FF0000;
         }
@@ -765,7 +767,7 @@
                         <a class="menu-item" href="?cuisine=moroccan">Moroccan</a>
                     </div>
                 </div>
-                <a class="menu-section-toggle menu-section-link" href="index.html?search=Desserts">Desserts</a>
+                <a class="menu-section-toggle menu-section-link" href="?cuisine=desserts">Desserts</a>
 
             </div>
 
@@ -913,6 +915,25 @@
         ];
 
         const cuisines = {
+
+            desserts: {
+                name: "Desserts",
+                description: "Sweet treats, cookies, and bakes made for sharing.",
+                colorClass: "desserts",
+                categories: ["All", "Desserts"],
+                recipes: [
+                    {
+                        name: "Chewy Pumpkin Dark Chocolate Chunk Cookies",
+                        description: "Chewy pumpkin-spiced cookies packed with dark chocolate chunks.",
+                        category: "Desserts",
+                        protein: "Vegetarian",
+                        method: "Oven",
+                        diet: ["Vegetarian"],
+                        tags: ["Desserts", "Cookies", "Oven"],
+                        href: "Chewy-Pumpkin-Dark-Chocolate-Chunk-Cookies.html"
+                    }
+                ]
+            },
 
             american: {
                 name: "American",
