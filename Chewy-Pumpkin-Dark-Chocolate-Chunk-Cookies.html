@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chewy Pumpkin Dark Chocolate Chunk Cookies | K's Kitchen</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #222;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            border-radius: 14px;
+            padding: 18px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .header-search input {
+            width: min(30vw, 240px);
+            padding: 10px 12px;
+            border: 1px solid #d8d8d8;
+            border-radius: 8px;
+            color: #222;
+            font: inherit;
+        }
+
+        .header-search button {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            background-color: #222;
+            color: white;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .back-link {
+            color: #8b4a63;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Recipe Header */
+        .recipe-header {
+            background-color: #8b4a63;
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
+        }
+
+        .recipe-header p {
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .recipe-header h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1;
+        }
+
+        .recipe-header .description {
+            max-width: 680px;
+            margin-top: 18px;
+            color: #fff3f5;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
+        .recipe-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+            gap: 0;
+        }
+
+        .recipe-sidebar,
+        .recipe-instructions {
+            padding: 38px 40px 46px;
+        }
+
+        .recipe-sidebar {
+            background-color: #fff3f5;
+            border-right: 1px solid #ead5dd;
+        }
+
+        .recipe-instructions {
+            background-color: white;
+        }
+
+        .recipe-layout h2 {
+            margin-bottom: 20px;
+            color: #8b4a63;
+            font-size: 1.55rem;
+        }
+
+        .recipe-layout h2:not(:first-child) {
+            margin-top: 34px;
+        }
+
+        ul,
+        ol {
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 13px;
+            line-height: 1.55;
+        }
+
+        .spice-list li {
+            margin-bottom: 11px;
+        }
+
+        footer {
+            max-width: 1100px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 15px 18px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .header-search {
+                order: 3;
+                width: 100%;
+                margin: 0;
+            }
+
+            .header-search input {
+                width: 100%;
+            }
+
+            .recipe-header,
+            .recipe-sidebar,
+            .recipe-instructions {
+                padding: 30px 24px;
+            }
+
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            .recipe-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #ead5dd;
+            }
+        }
+    
+        /* Consistent Segoe typography across site */
+        body { font-weight: 400; }
+        h1, h2, h3, h4, .logo { font-weight: 700; }
+        button, input, select, textarea { font-family: inherit; }
+        button, nav, .menu-button, .menu-section-toggle, .menu-section-title, .back-link { font-weight: 600; }
+        p, li { font-weight: 400; }
+        .recipe-info p, .footer-left p, .footer-right, .filter-header p { font-weight: 300; }
+    
+        /* Site-wide Segoe UI type system */
+        :root { font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif; font-synthesis: weight; }
+        body, button, input, select, textarea, option { font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif; }
+        body { font-weight: 400; }
+        h1, h2, h3, h4, .logo { font-weight: 700; }
+        strong, b { font-weight: 700; }
+        .menu-button, .menu-section-title, .menu-section-toggle, .back-link, .category-button, .clear-filters, .header-search button { font-weight: 600; }
+        .recipe-info p, .footer-left p, .footer-right, .filter-header p, .search-suggestion-meta { font-weight: 300; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="index.html">K's Kitchen</a>
+
+        <form class="header-search" action="index.html" method="get" role="search">
+            <label for="site-search" class="sr-only">Search recipes</label>
+            <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+
+        <a class="back-link" href="index.html?cuisine=desserts">
+            Back to Desserts
+        </a>
+    </header>
+
+
+    <main>
+
+        <!-- Recipe Header -->
+        <section class="recipe-header">
+            <div class="recipe-header-content">
+                <p style="text-transform: none;">Desserts · Cookies</p>
+                <h1>Chewy Pumpkin Dark Chocolate Chunk Cookies</h1>
+                <p class="description" style="text-transform: none;">Soft-centered, chewy pumpkin cookies with warm fall spices and generous dark chocolate chunks. Dairy-free when made with dairy-free butter and chocolate.</p>
+                <p class="description" style="text-transform: none;"><strong>Makes:</strong> About 18 cookies &nbsp;·&nbsp; <strong>Prep:</strong> 15 minutes &nbsp;·&nbsp; <strong>Chill:</strong> 30–45 minutes &nbsp;·&nbsp; <strong>Bake:</strong> 11–13 minutes</p>
+            </div>
+        </section>
+        <div class="recipe-layout">
+            <aside class="recipe-sidebar">
+                <h2>Ingredients</h2>
+                <ul>
+                    <li>⅓ cup pumpkin purée, blotted to remove excess moisture</li>
+                    <li>½ cup dairy-free butter, melted and cooled</li>
+                    <li>¾ cup brown sugar</li>
+                    <li>¼ cup granulated sugar</li>
+                    <li>1 egg yolk</li>
+                    <li>1 tsp vanilla extract</li>
+                    <li>1¾ cups all-purpose flour</li>
+                    <li>1 tsp ground cinnamon</li>
+                    <li>1 tsp pumpkin pie spice</li>
+                    <li>½ tsp baking soda</li>
+                    <li>½ tsp salt</li>
+                    <li>¾ cup dark chocolate chunks (dairy-free if preferred)</li>
+                    <li>Optional: flaky sea salt for finishing</li>
+                </ul>
+                <h2>Cookie Tips</h2>
+                <ul>
+                    <li>Blot the pumpkin thoroughly so the cookies stay chewy instead of cakey.</li>
+                    <li>Let the melted butter cool before mixing in the egg yolk.</li>
+                    <li>Take the cookies out while the centers still look a little soft.</li>
+                </ul>
+            </aside>
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <ol>
+                    <li><strong>Dry the pumpkin:</strong> Spread the pumpkin purée between layers of paper towels and gently blot until thick and paste-like. Measure ⅓ cup of the blotted pumpkin.</li>
+                    <li><strong>Mix the wet ingredients:</strong> Whisk the melted, cooled dairy-free butter with both sugars. Add the blotted pumpkin, egg yolk, and vanilla; mix until combined.</li>
+                    <li><strong>Mix the dry ingredients:</strong> In a separate bowl, whisk the flour, cinnamon, pumpkin pie spice, baking soda, and salt.</li>
+                    <li><strong>Make the dough:</strong> Fold the dry ingredients into the wet mixture just until no dry streaks remain. Fold in the dark chocolate chunks.</li>
+                    <li><strong>Chill:</strong> Cover and refrigerate the dough for 30–45 minutes.</li>
+                    <li><strong>Prepare to bake:</strong> Preheat the oven to 350°F (175°C). Line baking sheets with parchment paper.</li>
+                    <li><strong>Portion:</strong> Scoop about 2 tablespoons of dough per cookie onto the baking sheets, leaving roughly 2 inches between cookies. Gently flatten the tops.</li>
+                    <li><strong>Bake:</strong> Bake for 11–13 minutes, until the edges are set but the centers are still soft.</li>
+                    <li><strong>Cool:</strong> Leave the cookies on the baking sheet for 10 minutes, then transfer to a cooling rack. Finish with flaky sea salt if desired.</li>
+                </ol>
+            </section>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>K's Kitchen</p>
+    </footer>
+
+</body>
+</html>
