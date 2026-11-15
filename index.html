@@ -149,8 +149,6 @@
 
         .menu {
             position: relative;
-            padding-bottom: 10px;
-            margin-bottom: -10px;
         }
 
         .menu-button {
@@ -173,7 +171,7 @@
             display: none;
             position: absolute;
             right: 0;
-            top: calc(100% - 10px);
+            top: 100%;
             background-color: white;
             min-width: 180px;
             border-radius: 10px;
@@ -1729,12 +1727,8 @@
             setMenuOpen(!menu.classList.contains("is-open"));
         });
 
-        // Open on hover for desktop; keep open while navigating the dropdown.
-        // It closes only when clicking elsewhere, pressing Escape, or clicking Menu again.
-        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-            menuButton.addEventListener("mouseenter", () => setMenuOpen(true));
-        }
-
+        // The menu opens only on click. Hover must never change its open state.
+        // This prevents mouse movement and hover-before-click from closing it.
 
         const dinnerSection = document.querySelector(".menu-subsection");
         const dinnerToggle = dinnerSection.querySelector(".menu-section-toggle");
