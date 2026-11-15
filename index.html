@@ -1336,6 +1336,8 @@
         const searchTerm =
             params.get("search");
 
+        const selectedMeal = params.get("meal");
+
         const allRecipes =
             Object.entries(cuisines).flatMap(([cuisineKey, cuisine]) =>
                 cuisine.recipes.map((recipe) => ({
@@ -1680,6 +1682,25 @@
                 ? matchingRecipes.map((recipe) => recipeCard(recipe, true)).join("")
                 : "<p>No recipes matched your search.</p>";
             document.title = `Search | K's Kitchen`;
+        }
+
+        else if (["breakfast", "lunch", "dinner"].includes(selectedMeal)) {
+            const mealName = selectedMeal[0].toUpperCase() + selectedMeal.slice(1);
+            const mealRecipes = allRecipes.filter((recipe) => {
+                if (selectedMeal === "dinner") return recipe.cuisineKey !== "desserts";
+                return (recipe.tags || []).some((tag) => tag.toLowerCase() === selectedMeal)
+                    || (recipe.category || "").toLowerCase() === selectedMeal;
+            });
+            hero.classList.add("home-page");
+            title.textContent = mealName;
+            description.textContent = mealRecipes.length
+                ? `Browse our ${mealName.toLowerCase()} recipes.`
+                : `No ${mealName.toLowerCase()} recipes have been added yet. Check back for new recipes.`;
+            recipeSection.style.display = "block";
+            recipeGrid.innerHTML = mealRecipes.length
+                ? mealRecipes.map((recipe) => recipeCard(recipe, true)).join("")
+                : "<p>Recipes coming soon.</p>";
+            document.title = `${mealName} | K's Kitchen`;
         }
 
         else if (
