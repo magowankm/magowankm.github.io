@@ -630,6 +630,8 @@
         .desktop-dinner-options { display: none; position: absolute; top: 100%; left: 0; min-width: 175px; padding: 6px 0; background: #fff; border-radius: 10px; box-shadow: 0 5px 18px rgba(0,0,0,.15); z-index: 200; }
         .desktop-dinner:hover .desktop-dinner-options, .desktop-dinner:focus-within .desktop-dinner-options { display: block; }
         .desktop-dinner-options a { display: block; padding: 10px 16px; text-decoration: none; color: #222; font-size: .9rem; }
+        /* Use regular-weight labels for dinner cuisines and dropdown items. */
+        .desktop-dinner-options a, .menu-content a, .menu-content .menu-section-toggle { font-weight: 400; }
         @media (min-width: 901px) { .menu { display: none; } }
         @media (max-width: 900px) { .desktop-nav { display: none; } }
 
