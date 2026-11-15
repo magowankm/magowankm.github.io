@@ -49,7 +49,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-left: auto;
+            margin-left: 16px;
             margin-right: 16px;
             position: relative;
         }
@@ -623,7 +623,7 @@
 
 
         /* Desktop top-level navigation; mobile retains the Menu dropdown. */
-        .desktop-nav { display: flex; align-items: center; gap: 6px; margin-left: 20px; }
+        .desktop-nav { display: flex; align-items: center; gap: 6px; margin-left: auto; }
         .desktop-nav > a, .desktop-dinner > a { display: block; padding: 11px 12px; color: #222; text-decoration: none; font-weight: 600; font-size: .92rem; white-space: nowrap; border-radius: 8px; }
         .desktop-nav a:hover, .desktop-nav a:focus-visible { background: #f2f2f2; }
         .desktop-dinner { position: relative; }
@@ -732,22 +732,6 @@
             K's Kitchen
         </a>
 
-        <form class="header-search" action="index.html" method="get" role="search">
-            <label for="site-search" class="sr-only">Search recipes</label>
-            <input
-                id="site-search"
-                name="search"
-                type="search"
-                placeholder="Search recipes"
-                autocomplete="off"
-                aria-autocomplete="list"
-                aria-controls="search-suggestions"
-                aria-expanded="false"
-            >
-            <button type="submit">Search</button>
-            <div id="search-suggestions" class="search-suggestions" role="listbox"></div>
-        </form>
-
         <nav class="desktop-nav" aria-label="Recipe categories">
             <a href="index.html?meal=breakfast">Breakfast</a>
             <a href="index.html?meal=lunch">Lunch</a>
@@ -766,6 +750,22 @@
             </div>
             <a href="index.html?cuisine=desserts">Desserts</a>
         </nav>
+
+        <form class="header-search" action="index.html" method="get" role="search">
+            <label for="site-search" class="sr-only">Search recipes</label>
+            <input
+                id="site-search"
+                name="search"
+                type="search"
+                placeholder="Search recipes"
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="search-suggestions"
+                aria-expanded="false"
+            >
+            <button type="submit">Search</button>
+            <div id="search-suggestions" class="search-suggestions" role="listbox"></div>
+        </form>
 
         <!-- Mobile Menu -->
         <div class="menu">
