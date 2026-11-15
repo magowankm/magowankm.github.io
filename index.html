@@ -220,6 +220,20 @@
             background-color: #f2f2f2;
         }
 
+
+        /* Collapsible meal navigation */
+        .menu-content { overflow: visible; min-width: 200px; }
+        .menu-section-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 0; border-top: 1px solid #e5e5e5; background: white; color: #777; font: inherit; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; text-align: left; }
+        .menu-section-toggle:hover, .menu-section-toggle:focus-visible { background: #f2f2f2; }
+        .menu-section-toggle span { transition: transform .15s ease; }
+        .menu-subitems { display: none; }
+        .menu-subsection.is-expanded .menu-subitems { display: block; }
+        .menu-subsection.is-expanded .menu-section-toggle span { transform: rotate(90deg); }
+        @media (hover: hover) and (pointer: fine) {
+            .menu-subsection:hover .menu-subitems, .menu-subsection:focus-within .menu-subitems { display: block; }
+            .menu-subsection:hover .menu-section-toggle span, .menu-subsection:focus-within .menu-section-toggle span { transform: rotate(90deg); }
+        }
+
         /* =========================
            MAIN CONTENT
         ========================= */
@@ -718,49 +732,21 @@
 
             <div id="menu-content" class="menu-content">
 
-                <div class="menu-section-title">
-                    Breakfast
+                <div class="menu-section-title">Breakfast</div>
+                <div class="menu-section-title">Lunch</div>
+                <div class="menu-subsection">
+                    <button class="menu-section-toggle" type="button" aria-expanded="false" aria-controls="dinner-categories">Dinner <span aria-hidden="true">▸</span></button>
+                    <div id="dinner-categories" class="menu-subitems">
+                        <a class="menu-item" href="?cuisine=american">American</a>
+                        <a class="menu-item" href="?cuisine=chinese">Chinese</a>
+                        <a class="menu-item" href="?cuisine=greek">Greek</a>
+                        <a class="menu-item" href="?cuisine=indian">Indian</a>
+                        <a class="menu-item" href="?cuisine=italian">Italian</a>
+                        <a class="menu-item" href="?cuisine=japanese">Japanese</a>
+                        <a class="menu-item" href="?cuisine=mexican">Mexican</a>
+                        <a class="menu-item" href="?cuisine=moroccan">Moroccan</a>
+                    </div>
                 </div>
-
-                <div class="menu-section-title">
-                    Lunch
-                </div>
-
-                <div class="menu-section-title">
-                    Dinner
-                </div>
-
-                <a class="menu-item" href="?cuisine=american">
-                    American
-                </a>
-
-                <a class="menu-item" href="?cuisine=chinese">
-                    Chinese
-                </a>
-
-                <a class="menu-item" href="?cuisine=greek">
-                    Greek
-                </a>
-
-                <a class="menu-item" href="?cuisine=indian">
-                    Indian
-                </a>
-
-                <a class="menu-item" href="?cuisine=italian">
-                    Italian
-                </a>
-
-                <a class="menu-item" href="?cuisine=japanese">
-                    Japanese
-                </a>
-                
-                <a class="menu-item" href="?cuisine=mexican">
-                    Mexican
-                </a>
-
-                <a class="menu-item" href="?cuisine=moroccan">
-                    Moroccan
-                </a>
 
             </div>
 
@@ -1695,6 +1681,14 @@
 
         menuButton.addEventListener("click", () => {
             setMenuOpen(!menu.classList.contains("is-open"));
+        });
+
+
+        const dinnerSection = document.querySelector(".menu-subsection");
+        const dinnerToggle = document.querySelector(".menu-section-toggle");
+        dinnerToggle.addEventListener("click", () => {
+            const expanded = dinnerSection.classList.toggle("is-expanded");
+            dinnerToggle.setAttribute("aria-expanded", String(expanded));
         });
 
         document.addEventListener("click", (event) => {
