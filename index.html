@@ -226,9 +226,7 @@
         .menu-section-static { cursor: default; }
         .menu-section-static:hover { background: white; }
         .menu-content .menu-section-link { display: flex; align-items: center; padding: 12px 16px; font-size: .75rem; color: #777; cursor: pointer; position: relative; z-index: 1; }
-        @media (hover: hover) and (pointer: fine) {
-            .menu:hover .menu-content, .menu:focus-within .menu-content { display: block; }
-        }
+        /* JS manages the menu open state so pointer gaps cannot close it. */
         .menu-subitems { display: none; }
         .menu-subsection.is-expanded .menu-subitems { display: block; }
         .menu-subsection.is-expanded .menu-section-toggle span { transform: rotate(90deg); }
@@ -1730,6 +1728,12 @@
         menuButton.addEventListener("click", () => {
             setMenuOpen(!menu.classList.contains("is-open"));
         });
+
+        // Open on hover for desktop; keep open while navigating the dropdown.
+        // It closes only when clicking elsewhere, pressing Escape, or clicking Menu again.
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            menuButton.addEventListener("mouseenter", () => setMenuOpen(true));
+        }
 
 
         const dinnerSection = document.querySelector(".menu-subsection");
