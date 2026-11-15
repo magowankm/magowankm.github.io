@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steak and Frites | K's Kitchen</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #222;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            border-radius: 14px;
+            padding: 18px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .header-search input {
+            width: min(30vw, 240px);
+            padding: 10px 12px;
+            border: 1px solid #d8d8d8;
+            border-radius: 8px;
+            color: #222;
+            font: inherit;
+        }
+
+        .header-search button {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            background-color: #222;
+            color: white;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .back-link {
+            color: #a63d40;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Recipe Header */
+        .recipe-header {
+            background-color: #a63d40;
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
+        }
+
+        .recipe-header p {
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .recipe-header h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1;
+        }
+
+        .recipe-header .description {
+            max-width: 680px;
+            margin-top: 18px;
+            color: #fff5e8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
+        .recipe-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+            gap: 0;
+        }
+
+        .recipe-sidebar,
+        .recipe-instructions {
+            padding: 38px 40px 46px;
+        }
+
+        .recipe-sidebar {
+            background-color: #ffece8;
+            border-right: 1px solid #eadbc7;
+        }
+
+        .recipe-instructions {
+            background-color: white;
+        }
+
+        .recipe-layout h2 {
+            margin-bottom: 20px;
+            color: #a63d40;
+            font-size: 1.55rem;
+        }
+
+        .recipe-layout h2:not(:first-child) {
+            margin-top: 34px;
+        }
+
+        ul,
+        ol {
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 13px;
+            line-height: 1.55;
+        }
+
+        .spice-list li {
+            margin-bottom: 11px;
+        }
+
+        footer {
+            max-width: 1100px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 15px 18px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .header-search {
+                order: 3;
+                width: 100%;
+                margin: 0;
+            }
+
+            .header-search input {
+                width: 100%;
+            }
+
+            .recipe-header,
+            .recipe-sidebar,
+            .recipe-instructions {
+                padding: 30px 24px;
+            }
+
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            .recipe-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #eadbc7;
+            }
+        }
+    
+        /* Consistent Segoe typography across site */
+        body { font-weight: 400; }
+        h1, h2, h3, h4, .logo { font-weight: 700; }
+        button, input, select, textarea { font-family: inherit; }
+        button, nav, .menu-button, .menu-section-toggle, .menu-section-title, .back-link { font-weight: 600; }
+        p, li { font-weight: 400; }
+        .recipe-info p, .footer-left p, .footer-right, .filter-header p { font-weight: 300; }
+    
+        /* Site-wide Segoe UI type system */
+        :root { font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif; font-synthesis: weight; }
+        body, button, input, select, textarea, option { font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif; }
+        body { font-weight: 400; }
+        h1, h2, h3, h4, .logo { font-weight: 700; }
+        strong, b { font-weight: 700; }
+        .menu-button, .menu-section-title, .menu-section-toggle, .back-link, .category-button, .clear-filters, .header-search button { font-weight: 600; }
+        .recipe-info p, .footer-left p, .footer-right, .filter-header p, .search-suggestion-meta { font-weight: 300; }
+    
+/* Cuisine-matched theme */
+.back-link, .recipe-layout h2 { color: #006847; }
+.recipe-header { background-color: #006847; }
+.recipe-header .description { color: white; }
+.recipe-sidebar { background-color: #e9f5ef; border-color: #00684733; }
+
+.back-link,.recipe-layout h2 { color:#4a3728; }.recipe-header {background-color:#4a3728;}.recipe-sidebar {background-color:#f8f1e9;border-color:#4a372833;}.recipe-header .description {color:white;}
+</style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="../../index.html">K's Kitchen</a>
+
+        <a class="back-link" href="../../index.html?cuisine=american">
+            Back to American recipes
+        </a>
+
+        <form class="header-search" action="../../index.html" method="get" role="search">
+            <label for="site-search" class="sr-only">Search recipes</label>
+            <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+
+    <main>
+
+        <!-- Recipe Header -->
+        <section class="recipe-header">
+
+            <div class="recipe-header-content">
+
+                <p style="text-transform: none;">
+                    American Cuisine
+                </p>
+
+                <h1>
+                    Steak and Frites
+                </h1>
+
+                <p class="description" style="text-transform: none;">
+                    Pan-seared steak with crisp oven-baked fries and a simple garlic-herb finish.
+                </p>
+
+            </div>
+
+
+            <!-- Recipe Image -->
+            <img
+                class="recipe-header-image"
+                src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=900"
+                alt="Steak and Frites"
+            >
+
+        </section>
+
+
+        <!-- Recipe Content -->
+        <div class="recipe-layout">
+
+            <!-- Ingredients -->
+            <aside class="recipe-sidebar"><h2>Steak</h2><ul><li>2 strip steaks or ribeyes, about 8–12 oz each</li><li>1 tbsp avocado oil</li><li>1 tsp kosher salt</li><li>½ tsp black pepper</li><li>2 garlic cloves, smashed</li><li>1 tbsp dairy-free butter or olive oil</li><li>Fresh thyme or rosemary</li></ul><h2>Frites</h2><ul><li>1½ lb Yukon Gold or russet potatoes</li><li>1½ tbsp olive oil</li><li>½ tsp garlic powder</li><li>½ tsp smoked paprika</li><li>¾ tsp kosher salt</li><li>Fresh parsley, optional</li></ul></aside><section class="recipe-instructions"><h2>Instructions</h2><ol><li>Heat oven to 450°F. Cut potatoes into thin fries and soak in cold water for 15–20 minutes if time allows.</li><li>Drain and dry fries thoroughly. Toss with oil, garlic powder, paprika and salt. Spread on a baking sheet without crowding.</li><li>Roast 25–35 minutes, flipping halfway, until deeply golden and crisp.</li><li>Pat steaks dry and season with salt and pepper. Heat a heavy skillet over medium-high heat until hot.</li><li>Add avocado oil and sear steaks 3–5 minutes per side, depending on thickness and desired doneness. Add garlic, herbs and dairy-free butter near the end; spoon over steaks.</li><li>Check doneness with a thermometer; USDA recommends 145°F with a 3-minute rest for whole beef steaks. Rest 5 minutes, slice and serve with fries.</li></ol></section>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>K's Kitchen</p>
+    </footer>
+
+</body>
+</html>
