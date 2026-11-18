@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stovetop Thai Red Curry Chicken | K's Kitchen</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #222;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            border-radius: 14px;
+            padding: 18px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            color: #222;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .header-search input {
+            width: min(30vw, 240px);
+            padding: 10px 12px;
+            border: 1px solid #d8d8d8;
+            border-radius: 8px;
+            color: #222;
+            font: inherit;
+        }
+
+        .header-search button {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            background-color: #222;
+            color: white;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .back-link {
+            color: #a63d40;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Recipe Header */
+        .recipe-header {
+            background-color: #a63d40;
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .recipe-header-content {
+            flex: 1;
+        }
+
+        .recipe-header p {
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .recipe-header h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1;
+        }
+
+        .recipe-header .description {
+            max-width: 680px;
+            margin-top: 18px;
+            color: #fff5e8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Recipe Header Image */
+        .recipe-header-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* Recipe Layout */
+        .recipe-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+            gap: 0;
+        }
+
+        .recipe-sidebar,
+        .recipe-instructions {
+            padding: 38px 40px 46px;
+        }
+
+        .recipe-sidebar {
+            background-color: #ffece8;
+            border-right: 1px solid #eadbc7;
+        }
+
+        .recipe-instructions {
+            background-color: white;
+        }
+
+        .recipe-layout h2 {
+            margin-bottom: 20px;
+            color: #a63d40;
+            font-size: 1.55rem;
+        }
+
+        .recipe-layout h2:not(:first-child) {
+            margin-top: 34px;
+        }
+
+        ul,
+        ol {
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 13px;
+            line-height: 1.55;
+        }
+
+        .spice-list li {
+            margin-bottom: 11px;
+        }
+
+        footer {
+            max-width: 1100px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 15px 18px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .header-search {
+                order: 3;
+                width: 100%;
+                margin: 0;
+            }
+
+            .header-search input {
+                width: 100%;
+            }
+
+            .recipe-header,
+            .recipe-sidebar,
+            .recipe-instructions {
+                padding: 30px 24px;
+            }
+
+            .recipe-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recipe-header-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            .recipe-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #eadbc7;
+            }
+        }
+    
+        /* Consistent Segoe typography across site */
+        body { font-weight: 400; }
+        h1, h2, h3, h4, .logo { font-weight: 700; }
+        button, input, select, textarea { font-family: inherit; }
+        button, nav, .menu-button, .menu-section-toggle, .menu-section-title, .back-link { font-weight: 600; }
+        p, li { font-weight: 400; }
+        .recipe-info p, .footer-left p, .footer-right, .filter-header p { font-weight: 300; }
+    
+        /* Site-wide Segoe UI type system */
+        :root { font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif; font-synthesis: weight; }
+        body, button, input, select, textarea, option { font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif; }
+        body { font-weight: 400; }
+        h1, h2, h3, h4, .logo { font-weight: 700; }
+        strong, b { font-weight: 700; }
+        .menu-button, .menu-section-title, .menu-section-toggle, .back-link, .category-button, .clear-filters, .header-search button { font-weight: 600; }
+        .recipe-info p, .footer-left p, .footer-right, .filter-header p, .search-suggestion-meta { font-weight: 300; }
+    
+/* Cuisine-matched theme */
+.back-link, .recipe-layout h2 { color: #9c3b32; }
+.recipe-header { background-color: #9c3b32; }
+.recipe-header .description { color: white; }
+.recipe-sidebar { background-color: #fff0ec; border-color: #9c3b3233; }
+</style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="../../index.html">K's Kitchen</a>
+
+        <a class="back-link" href="../../index.html?cuisine=thai">
+            Back to Thai recipes
+        </a>
+
+        <form class="header-search" action="../../index.html" method="get" role="search">
+            <label for="site-search" class="sr-only">Search recipes</label>
+            <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+
+    <main>
+
+        <!-- Recipe Header -->
+        <section class="recipe-header">
+
+            <div class="recipe-header-content">
+
+                <p style="text-transform: none;">
+                    Thai Cuisine
+                </p>
+
+                <h1>
+                    Stovetop Thai Red Curry Chicken
+                </h1>
+
+                <p class="description" style="text-transform: none;">
+                    Creamy coconut red curry with chicken thighs, bell pepper, green beans, lime, and Thai basil.
+                </p>
+                <p style="text-transform: none;">Serves 4 · About 35 minutes
+                </p>
+
+            </div>
+
+
+            <!-- Recipe Image -->
+            <img
+                class="recipe-header-image"
+                src="https://teresasrecipes.com/images/4090fc2b-40e0-4d52-b7fd-cb9ba6b9366b.jpg"
+                alt="Stovetop Thai Red Curry Chicken"
+            >
+
+        </section>
+
+
+        <!-- Recipe Content -->
+        <div class="recipe-layout">
+
+            <!-- Ingredients -->
+            <aside class="recipe-sidebar">
+                <h2>Ingredients</h2>
+                <ul>
+                    <li>1½ lb boneless, skinless chicken thighs, cut into bite-size pieces</li>
+                    <li>1 tbsp avocado oil or other neutral oil</li>
+                    <li>2–3 tbsp Thai red curry paste (check the label for shrimp paste and other seafood)</li>
+                    <li>2 cloves garlic, minced, or ½ tsp garlic powder</li>
+                    <li>1 tbsp grated fresh ginger</li>
+                    <li>1 can (13.5 oz) full-fat unsweetened coconut milk</li>
+                    <li>½ cup low-sodium chicken broth</li>
+                    <li>1 red bell pepper, sliced</li>
+                    <li>1½ cups green beans, trimmed and halved</li>
+                    <li>1 tbsp low-sodium soy sauce or tamari</li>
+                    <li>1–2 tsp brown sugar</li>
+                    <li>1–2 tbsp fresh lime juice</li>
+                    <li>½ cup loosely packed Thai basil leaves, or a handful of cilantro</li>
+                    <li>Cooked jasmine rice, for serving</li>
+                </ul>
+            </aside>
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <ol>
+                    <li><strong>Fry the curry paste.</strong> Heat the oil in a deep skillet over medium heat. Add 2 tbsp curry paste, the garlic, and ginger. Stir for about 1 minute, until fragrant. If it starts to stick, stir in a spoonful of coconut milk.</li>
+                    <li><strong>Build the sauce.</strong> Stir in the coconut milk, broth, soy sauce, and 1 tsp brown sugar. Bring to a gentle simmer.</li>
+                    <li><strong>Cook the chicken and vegetables.</strong> Add the chicken and simmer uncovered for 5 minutes. Add the bell pepper and green beans, then simmer for another 7–10 minutes, until the chicken reaches 165°F and the vegetables are tender-crisp.</li>
+                    <li><strong>Finish with lime and basil.</strong> Turn off the heat and stir in 1 tbsp lime juice and the basil. Taste and add more lime for brightness, a splash of soy sauce for saltiness, or the remaining teaspoon of sugar if the sauce tastes too sharp. Serve over jasmine rice.</li>
+                </ol>
+                <p><strong>For a thicker curry,</strong> use ¼ cup broth. For a bolder sauce with a mild curry paste, fry the full 3 tbsp in step one.</p>
+                <p style="margin-top:20px;font-size:.82rem;color:#666">Serving photo from Teresa’s Recipes.</p>
+            </section>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>K's Kitchen</p>
+    </footer>
+
+</body>
+</html>
