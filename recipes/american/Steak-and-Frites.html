@@ -270,9 +270,10 @@
 .back-link,.recipe-layout h2 { color:#4a3728; }.recipe-header {background-color:#4a3728;}.recipe-sidebar {background-color:#f8f1e9;border-color:#4a372833;}.recipe-header .description {color:white;}
 </style>
     <link rel="stylesheet" href="../recipe-navigation.css">
+    <link rel="stylesheet" href="../../compact-index.css">
 </head>
 
-<body>
+<body class="compact-index">
 
     <header class="recipe-navigation">
         <a class="logo" href="../../index.html">K's Kitchen</a>
@@ -289,14 +290,14 @@
     </header>
 
 
-    <main>
+    <main class="index-recipe">
 
         <!-- Recipe Header -->
         <section class="recipe-header">
 
             <div class="recipe-header-content">
 
-                <p style="text-transform: none;">
+                <p class="index-kicker">
                     American Cuisine
                 </p>
 
@@ -325,7 +326,45 @@
         <div class="recipe-layout">
 
             <!-- Ingredients -->
-            <aside class="recipe-sidebar"><h2>Steak</h2><ul><li>2 strip steaks or ribeyes, about 8–12 oz each</li><li>1 tbsp avocado oil</li><li>1 tsp kosher salt</li><li>½ tsp black pepper</li><li>2 garlic cloves, smashed</li><li>1 tbsp dairy-free butter or olive oil</li><li>Fresh thyme or rosemary</li></ul><h2>Frites</h2><ul><li>1½ lb Yukon Gold or russet potatoes</li><li>1½ tbsp olive oil</li><li>½ tsp garlic powder</li><li>½ tsp smoked paprika</li><li>¾ tsp kosher salt</li><li>Fresh parsley, optional</li></ul></aside><section class="recipe-instructions"><h2>Instructions</h2><ol><li>Heat oven to 450°F. Cut potatoes into thin fries and soak in cold water for 15–20 minutes if time allows.</li><li>Drain and dry fries thoroughly. Toss with oil, garlic powder, paprika and salt. Spread on a baking sheet without crowding.</li><li>Roast 25–35 minutes, flipping halfway, until deeply golden and crisp.</li><li>Pat steaks dry and season with salt and pepper. Heat a heavy skillet over medium-high heat until hot.</li><li>Add avocado oil and sear steaks 3–5 minutes per side, depending on thickness and desired doneness. Add garlic, herbs and dairy-free butter near the end; spoon over steaks.</li><li>Check doneness with a thermometer; USDA recommends 145°F with a 3-minute rest for whole beef steaks. Rest 5 minutes, slice and serve with fries.</li></ol></section>
+            <aside class="recipe-sidebar">
+                <h2>Ingredients</h2>
+                <div class="index-ingredients">
+                    <section>
+                        <h3>Steak</h3>
+                        <ul>
+                            <li><label><input type="checkbox"><span>2 strip steaks or ribeyes, about 8–12 oz each</span></label></li>
+                            <li><label><input type="checkbox"><span>1 tbsp avocado oil</span></label></li>
+                            <li><label><input type="checkbox"><span>1 tsp kosher salt</span></label></li>
+                            <li><label><input type="checkbox"><span>½ tsp black pepper</span></label></li>
+                            <li><label><input type="checkbox"><span>2 garlic cloves, smashed</span></label></li>
+                            <li><label><input type="checkbox"><span>1 tbsp dairy-free butter or olive oil</span></label></li>
+                            <li><label><input type="checkbox"><span>Fresh thyme or rosemary</span></label></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Frites</h3>
+                        <ul>
+                            <li><label><input type="checkbox"><span>1½ lb Yukon Gold or russet potatoes</span></label></li>
+                            <li><label><input type="checkbox"><span>1½ tbsp olive oil</span></label></li>
+                            <li><label><input type="checkbox"><span>½ tsp garlic powder</span></label></li>
+                            <li><label><input type="checkbox"><span>½ tsp smoked paprika</span></label></li>
+                            <li><label><input type="checkbox"><span>¾ tsp kosher salt</span></label></li>
+                            <li><label><input type="checkbox"><span>Fresh parsley, optional</span></label></li>
+                        </ul>
+                    </section>
+                </div>
+            </aside>
+            <section class="recipe-instructions">
+                <h2>Instructions</h2>
+                <ol>
+                    <li>Heat oven to 450°F. Cut potatoes into thin fries and soak in cold water for 15–20 minutes if time allows.</li>
+                    <li>Drain and dry fries thoroughly. Toss with oil, garlic powder, paprika and salt. Spread on a baking sheet without crowding.</li>
+                    <li>Roast 25–35 minutes, flipping halfway, until deeply golden and crisp.</li>
+                    <li>Pat steaks dry and season with salt and pepper. Heat a heavy skillet over medium-high heat until hot.</li>
+                    <li>Add avocado oil and sear steaks 3–5 minutes per side, depending on thickness and desired doneness. Add garlic, herbs and dairy-free butter near the end; spoon over steaks.</li>
+                    <li>Check doneness with a thermometer; USDA recommends 145°F with a 3-minute rest for whole beef steaks. Rest 5 minutes, slice and serve with fries.</li>
+                </ol>
+            </section>
         </div>
 
     </main>

@@ -297,15 +297,6 @@
             background-size: cover;
         }
 
-        .home-landing {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .home-landing .cuisine-banner {
-            flex: 1;
-        }
-
         .home-page .hero-content {
             display: none;
         }
@@ -674,11 +665,6 @@
                 background-image: url("Ks Kitchen Mobile.png");
             }
 
-            .home-landing .cuisine-banner {
-                background-color: #ede5da;
-                background-size: 100% auto;
-            }
-
             .hero-content {
                 padding: 20px 18px;
             }
@@ -741,6 +727,7 @@
         .menu-button, .menu-section-title, .menu-section-toggle, .back-link, .category-button, .clear-filters, .header-search button { font-weight: 600; }
         .recipe-info p, .footer-left p, .footer-right, .search-suggestion-meta { font-weight: 300; }
     </style>
+    <link rel="stylesheet" href="compact-index.css">
 </head>
 
 <body>
@@ -834,6 +821,41 @@
     ========================= -->
 
     <main id="hero">
+        <div class="index-home">
+            <section class="index-hero" aria-labelledby="index-title">
+                <div>
+                    <nav class="index-categories" aria-label="Browse by meal">
+                        <a href="?meal=breakfast">Breakfast</a>
+                        <a href="?meal=dinner">Dinner</a>
+                        <a href="?cuisine=desserts">Desserts</a>
+                    </nav>
+                    <h1 id="index-title" class="index-heading">Find your next recipe.</h1>
+                    <form class="index-search" action="index.html" method="get" role="search" aria-label="Find a recipe">
+                        <label class="sr-only" for="index-search">Find a recipe</label>
+                        <input id="index-search" type="search" name="search" placeholder="Try potatoes or Thai basil" required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+                <img class="index-hero-image" src="recipes/american/Crispy-Breakfast-Potatoes.jpg" alt="Golden roasted breakfast potatoes">
+            </section>
+            <section class="index-featured" aria-labelledby="index-featured-title">
+                <h2 id="index-featured-title">Featured recipes</h2>
+                <div class="index-tiles">
+                    <a class="index-tile" href="recipes/american/Steak-and-Frites.html">
+                        <img src="recipes/american/Steak-and-Frites.jpg" alt="">
+                        <span>Steak and Frites</span>
+                    </a>
+                    <a class="index-tile" href="recipes/american/Crispy-Breakfast-Potatoes.html">
+                        <img src="recipes/american/Crispy-Breakfast-Potatoes.jpg" alt="">
+                        <span>Crispy Breakfast Potatoes</span>
+                    </a>
+                    <a class="index-tile" href="recipes/thai/Thai-Basil-Beef.html">
+                        <img src="recipes/thai/Thai-Basil-Beef.jpg" alt="">
+                        <span>Thai Basil Beef</span>
+                    </a>
+                </div>
+            </section>
+        </div>
 
         <!-- Cuisine Banner -->
 
@@ -1795,9 +1817,7 @@
 
             /* Home page */
 
-            hero.classList.add(
-                "home-page", "home-landing"
-            );
+            document.body.classList.add("compact-index");
 
         }
 
