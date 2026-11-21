@@ -267,22 +267,23 @@
 .recipe-header .description { color: white; }
 .recipe-sidebar { background-color: #fff5e8; border-color: #b45f0633; }
 </style>
+    <link rel="stylesheet" href="../recipe-navigation.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="recipe-navigation">
         <a class="logo" href="../../index.html">K's Kitchen</a>
-
-        <a class="back-link" href="../../index.html?cuisine=indian">
-            Back to Indian recipes
-        </a>
 
         <form class="header-search" action="../../index.html" method="get" role="search">
             <label for="site-search" class="sr-only">Search recipes</label>
             <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
             <button type="submit">Search</button>
         </form>
+
+        <a class="back-link" href="../../index.html?cuisine=indian">
+            <span aria-hidden="true">&#8592;</span> Back to Indian recipes
+        </a>
     </header>
 
 

@@ -269,22 +269,23 @@
 
 .back-link,.recipe-layout h2 { color:#8b1e1e; }.recipe-header {background-color:#8b1e1e;}.recipe-sidebar {background-color:#fff0ee;border-color:#8b1e1e33;}.recipe-header .description {color:white;}
 </style>
+    <link rel="stylesheet" href="../recipe-navigation.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="recipe-navigation">
         <a class="logo" href="../../index.html">K's Kitchen</a>
-
-        <a class="back-link" href="../../index.html?cuisine=chinese">
-            Back to Chinese recipes
-        </a>
 
         <form class="header-search" action="../../index.html" method="get" role="search">
             <label for="site-search" class="sr-only">Search recipes</label>
             <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
             <button type="submit">Search</button>
         </form>
+
+        <a class="back-link" href="../../index.html?cuisine=chinese">
+            <span aria-hidden="true">&#8592;</span> Back to Chinese recipes
+        </a>
     </header>
 
 

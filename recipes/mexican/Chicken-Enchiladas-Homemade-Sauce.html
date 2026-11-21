@@ -269,22 +269,23 @@
 
 .back-link,.recipe-layout h2 { color:#006847; }.recipe-header {background-color:#006847;}.recipe-sidebar {background-color:#e9f5ef;border-color:#00684733;}.recipe-header .description {color:white;}
 </style>
+    <link rel="stylesheet" href="../recipe-navigation.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="recipe-navigation">
         <a class="logo" href="../../index.html">K's Kitchen</a>
-
-        <a class="back-link" href="../../index.html?cuisine=mexican">
-            Back to Mexican recipes
-        </a>
 
         <form class="header-search" action="../../index.html" method="get" role="search">
             <label for="site-search" class="sr-only">Search recipes</label>
             <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
             <button type="submit">Search</button>
         </form>
+
+        <a class="back-link" href="../../index.html?cuisine=mexican">
+            <span aria-hidden="true">&#8592;</span> Back to Mexican recipes
+        </a>
     </header>
 
 

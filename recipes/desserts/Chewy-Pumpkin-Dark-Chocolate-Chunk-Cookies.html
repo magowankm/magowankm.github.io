@@ -267,22 +267,23 @@
 .recipe-header .description { color: white; }
 .recipe-sidebar { background-color: #fff3f5; border-color: #8b4a6333; }
 </style>
+    <link rel="stylesheet" href="../recipe-navigation.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="recipe-navigation">
         <a class="logo" href="../../index.html">K's Kitchen</a>
-
-        <a class="back-link" href="../../index.html?cuisine=desserts">
-            Back to Desserts
-        </a>
 
         <form class="header-search" action="../../index.html" method="get" role="search">
             <label for="site-search" class="sr-only">Search recipes</label>
             <input id="site-search" name="search" type="search" placeholder="Search recipes" autocomplete="off">
             <button type="submit">Search</button>
         </form>
+
+        <a class="back-link" href="../../index.html?cuisine=desserts">
+            <span aria-hidden="true">&#8592;</span> Back to Desserts
+        </a>
     </header>
 
 
