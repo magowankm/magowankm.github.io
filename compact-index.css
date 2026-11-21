@@ -56,7 +56,7 @@ body.compact-index {
 
 .compact-index-home .index-hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, min(34vw, 320px));
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     align-items: center;
     gap: clamp(14px, 3vw, 36px);
 }
@@ -66,7 +66,7 @@ body.compact-index {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .index-brand-image {
+    .index-brand-art {
         max-width: 220px;
     }
 }
