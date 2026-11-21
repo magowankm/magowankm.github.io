@@ -367,40 +367,58 @@
             padding: 26px 24px 4px;
         }
 
-        .filter-bar {
-            display: grid;
-            grid-template-columns: auto minmax(0, 1.35fr) repeat(3, minmax(0, 1fr)) auto;
-            gap: 10px;
-            align-items: end;
+        .filter-panel {
             padding: 12px;
             border-radius: 10px;
             background: #ecf0f3;
         }
 
-        .filter-bar h2 {
-            align-self: center;
+        .filter-panel h2 {
+            margin-bottom: 8px;
             font-size: 1.25rem;
             letter-spacing: -.03em;
         }
 
-        @media (max-width: 960px) {
-            .filter-bar {
-                grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr)) auto;
-            }
-
-            .filter-bar h2 {
-                grid-column: 1 / -1;
-            }
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
-        @media (max-width: 700px) {
+        .category-button {
+            padding: 6px 11px;
+            border: 1px solid #b6c3cf;
+            border-radius: 999px;
+            background: white;
+            color: #354e64;
+            font: inherit;
+            font-size: .875rem;
+            cursor: pointer;
+        }
+
+        .category-button:hover {
+            background: #dce5ed;
+        }
+
+        .category-button[aria-pressed="true"] {
+            border-color: #354e64;
+            background: #354e64;
+            color: white;
+        }
+
+        .filter-bar {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+            gap: 10px;
+            align-items: end;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #dce3e8;
+        }
+
+        @media (max-width: 650px) {
             .filter-bar {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .clear-filters {
-                grid-column: 1 / -1;
-                justify-self: start;
             }
         }
 
@@ -810,39 +828,36 @@
         ========================= -->
 
         <section id="filter-section" class="filter-section">
-            <div class="filter-bar">
+            <div class="filter-panel">
                 <h2>Browse Recipes</h2>
-                <div class="filter-group">
-                    <label for="category-filter">Category</label>
-                    <select id="category-filter">
-                        <option value="all">All Categories</option>
-                    </select>
-                </div>
+                <div id="category-buttons" class="category-buttons" role="group" aria-label="Recipe categories"></div>
 
-                <div class="filter-group">
-                    <label for="protein-filter">Protein</label>
-                    <select id="protein-filter">
-                        <option value="all">All Proteins</option>
-                    </select>
-                </div>
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label for="protein-filter">Protein</label>
+                        <select id="protein-filter">
+                            <option value="all">All Proteins</option>
+                        </select>
+                    </div>
 
-                <div class="filter-group">
-                    <label for="method-filter">Cooking Method</label>
-                    <select id="method-filter">
-                        <option value="all">All Methods</option>
-                    </select>
-                </div>
+                    <div class="filter-group">
+                        <label for="method-filter">Cooking Method</label>
+                        <select id="method-filter">
+                            <option value="all">All Methods</option>
+                        </select>
+                    </div>
 
-                <div class="filter-group">
-                    <label for="diet-filter">Dietary</label>
-                    <select id="diet-filter">
-                        <option value="all">All</option>
-                    </select>
-                </div>
+                    <div class="filter-group">
+                        <label for="diet-filter">Dietary</label>
+                        <select id="diet-filter">
+                            <option value="all">All</option>
+                        </select>
+                    </div>
 
-                <button id="clear-filters" class="clear-filters" type="button">
-                    Clear Filters
-                </button>
+                    <button id="clear-filters" class="clear-filters" type="button">
+                        Clear Filters
+                    </button>
+                </div>
             </div>
 
             <div id="filter-results" class="filter-results" role="status"></div>
@@ -1288,8 +1303,9 @@
         const filterSection =
             document.getElementById("filter-section");
 
-        const categoryFilter =
-            document.getElementById("category-filter");
+        const categoryButtons =
+            document.getElementById("category-buttons");
+        let selectedCategory = "All";
 
         const proteinFilter =
             document.getElementById("protein-filter");
@@ -1522,7 +1538,9 @@
         function buildCuisineFilters(cuisine) {
             filterSection.style.display = "block";
 
-            populateSelect(categoryFilter, cuisine.categories.filter((category) => category !== "All"), "All Categories");
+            categoryButtons.innerHTML = cuisine.categories.map((category) => `
+                <button class="category-button" type="button" data-category="${category}" aria-pressed="false">${category}</button>
+            `).join("");
             populateSelect(proteinFilter, uniqueValues(cuisine.recipes, "protein"), "All Proteins");
             populateSelect(methodFilter, uniqueValues(cuisine.recipes, "method"), "All Methods");
             populateSelect(dietFilter, uniqueValues(cuisine.recipes, "diet"), "All");
@@ -1534,13 +1552,15 @@
             if (!selectedCuisine || !cuisines[selectedCuisine]) return;
 
             const recipes = cuisines[selectedCuisine].recipes;
-            const selectedCategory = categoryFilter.value;
+            for (const button of categoryButtons.querySelectorAll("button")) {
+                button.setAttribute("aria-pressed", button.dataset.category === selectedCategory);
+            }
             const selectedProtein = proteinFilter.value;
             const selectedMethod = methodFilter.value;
             const selectedDiet = dietFilter.value;
 
             const filteredRecipes = recipes.filter((recipe) => {
-                const matchesCategory = selectedCategory === "all" || recipe.category === selectedCategory;
+                const matchesCategory = selectedCategory === "All" || recipe.category === selectedCategory;
                 const matchesProtein = selectedProtein === "all" || recipe.protein === selectedProtein;
                 const matchesMethod = selectedMethod === "all" || recipe.method === selectedMethod;
                 const matchesDiet = selectedDiet === "all" || (recipe.diet && recipe.diet.includes(selectedDiet));
@@ -1560,13 +1580,19 @@
             filterResults.textContent = `Showing ${filteredRecipes.length} of ${recipes.length} recipes`;
         }
 
-        categoryFilter.addEventListener("change", updateFilteredRecipes);
+        categoryButtons.addEventListener("click", (event) => {
+            const button = event.target.closest("button[data-category]");
+            if (!button) return;
+
+            selectedCategory = button.dataset.category;
+            updateFilteredRecipes();
+        });
         proteinFilter.addEventListener("change", updateFilteredRecipes);
         methodFilter.addEventListener("change", updateFilteredRecipes);
         dietFilter.addEventListener("change", updateFilteredRecipes);
 
         clearFiltersButton.addEventListener("click", () => {
-            categoryFilter.value = "all";
+            selectedCategory = "All";
             proteinFilter.value = "all";
             methodFilter.value = "all";
             dietFilter.value = "all";
@@ -1584,16 +1610,16 @@
             const cuisine = cuisines[selectedCuisine];
 
             if (cuisine.categories.includes(tag)) {
-                categoryFilter.value = tag === "All" ? "all" : tag;
+                selectedCategory = tag;
             }
             else if (tag === "Main") {
-                categoryFilter.value = "Mains";
+                selectedCategory = "Mains";
             }
             else if (tag === "Bread") {
-                categoryFilter.value = "Breads";
+                selectedCategory = "Breads";
             }
             else if (tag === "Side") {
-                categoryFilter.value = "Vegetables & Sides";
+                selectedCategory = "Vegetables & Sides";
             }
             else if ([...proteinFilter.options].some((option) => option.value === tag)) {
                 proteinFilter.value = tag;
