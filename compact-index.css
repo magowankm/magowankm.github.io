@@ -55,9 +55,26 @@ body.compact-index {
 }
 
 .compact-index-home .index-hero {
-    display: block;
-    max-width: 620px;
-    margin-top: 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 470px);
+    align-items: center;
+    gap: clamp(18px, 5vw, 64px);
+}
+
+@media (max-width: 960px) {
+    .compact-index-home .index-hero {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .compact-index-home .index-hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .index-brand-image {
+        max-width: 470px;
+    }
 }
 
 .index-categories {
@@ -65,16 +82,6 @@ body.compact-index {
     letter-spacing: .07em;
     text-transform: uppercase;
     color: var(--index-muted);
-}
-
-.index-categories {
-    font: 600 .75rem/1.5 ui-monospace, monospace;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: var(--index-muted);
-}
-
-.index-categories {
     display: flex;
     flex-wrap: wrap;
     gap: 8px 18px;
