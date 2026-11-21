@@ -297,6 +297,15 @@
             background-size: cover;
         }
 
+        .home-landing {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .home-landing .cuisine-banner {
+            flex: 1;
+        }
+
         .home-page .hero-content {
             display: none;
         }
@@ -663,6 +672,11 @@
 
             .home-page .cuisine-banner {
                 background-image: url("Ks Kitchen Mobile.png");
+            }
+
+            .home-landing .cuisine-banner {
+                background-color: #ede5da;
+                background-size: 100% auto;
             }
 
             .hero-content {
@@ -1771,7 +1785,7 @@
             /* Home page */
 
             hero.classList.add(
-                "home-page"
+                "home-page", "home-landing"
             );
 
         }
