@@ -179,13 +179,13 @@ body.compact-index {
     background: transparent;
 }
 
-.compact-index .secondary-filters {
-    background: #ecf0f3;
+.compact-index #cuisine-banner.index-cuisine {
+    justify-content: center;
+    text-align: center;
 }
 
-.compact-index .category-button.active {
-    background: #354e64;
-    border-color: #354e64;
+.compact-index #cuisine-banner.index-cuisine p {
+    margin-inline: auto;
 }
 
 .compact-index .recipe-card {
@@ -296,12 +296,6 @@ body.compact-index {
 .compact-index .recipe-instructions li::marker {
     color: var(--index-muted);
     font-weight: 700;
-}
-
-@media (min-width: 601px) and (max-width: 760px) {
-    .compact-index .secondary-filters {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
 }
 
 @media (max-width: 700px) {

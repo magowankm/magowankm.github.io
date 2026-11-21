@@ -367,58 +367,41 @@
             padding: 26px 24px 4px;
         }
 
-        .filter-header {
-            display: flex;
-            align-items: center;
-            gap: 12px 16px;
-            margin-bottom: 18px;
-        }
-
-        .filter-header h2 {
-            flex: none;
-            padding-right: 16px;
-            border-right: 1px solid #d7d7d7;
-            font-size: 1.45rem;
-            color: #222;
-        }
-
-        .category-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            min-width: 0;
-        }
-
-        .category-button {
-            border: 1px solid #d7d7d7;
-            background: white;
-            color: #333;
-            padding: 9px 14px;
-            border-radius: 999px;
-            cursor: pointer;
-            font: inherit;
-            font-size: 0.88rem;
-            font-weight: 600;
-        }
-
-        .category-button:hover {
-            background: #f4f4f4;
-        }
-
-        .category-button.active {
-            background: #222;
-            border-color: #222;
-            color: white;
-        }
-
-        .secondary-filters {
+        .filter-bar {
             display: grid;
-            grid-template-columns: repeat(3, minmax(150px, 1fr)) auto;
-            gap: 12px;
+            grid-template-columns: auto minmax(0, 1.35fr) repeat(3, minmax(0, 1fr)) auto;
+            gap: 10px;
             align-items: end;
-            padding: 16px;
-            border-radius: 12px;
-            background: #f6f6f6;
+            padding: 12px;
+            border-radius: 10px;
+            background: #ecf0f3;
+        }
+
+        .filter-bar h2 {
+            align-self: center;
+            font-size: 1.25rem;
+            letter-spacing: -.03em;
+        }
+
+        @media (max-width: 960px) {
+            .filter-bar {
+                grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr)) auto;
+            }
+
+            .filter-bar h2 {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .filter-bar {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .clear-filters {
+                grid-column: 1 / -1;
+                justify-self: start;
+            }
         }
 
         .filter-group label {
@@ -445,7 +428,7 @@
             padding: 10px 14px;
             border: 0;
             border-radius: 8px;
-            background: #222;
+            background: #354e64;
             color: white;
             font: inherit;
             font-weight: 600;
@@ -619,24 +602,6 @@
                 padding: 22px 14px 2px;
             }
 
-            .filter-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .filter-header h2 {
-                padding-right: 0;
-                border-right: 0;
-            }
-
-            .secondary-filters {
-                grid-template-columns: 1fr;
-            }
-
-            .clear-filters {
-                width: 100%;
-            }
-
             footer {
                 flex-direction: column;
                 align-items: flex-start;
@@ -661,7 +626,7 @@
         body { font-weight: 400; }
         h1, h2, h3, h4, .logo { font-weight: 700; }
         strong, b { font-weight: 700; }
-        .menu-button, .menu-section-title, .menu-section-toggle, .back-link, .category-button, .clear-filters, .header-search button { font-weight: 600; }
+        .menu-button, .menu-section-title, .menu-section-toggle, .back-link, .clear-filters, .header-search button { font-weight: 600; }
         .recipe-info p, .footer-left p, .footer-right, .search-suggestion-meta { font-weight: 300; }
     </style>
     <link rel="stylesheet" href="compact-index.css">
@@ -822,12 +787,15 @@
         ========================= -->
 
         <section id="filter-section" class="filter-section">
-            <div class="filter-header">
+            <div class="filter-bar">
                 <h2>Browse Recipes</h2>
-                <div id="category-buttons" class="category-buttons" role="group" aria-label="Recipe categories"></div>
-            </div>
+                <div class="filter-group">
+                    <label for="category-filter">Category</label>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
 
-            <div class="secondary-filters">
                 <div class="filter-group">
                     <label for="protein-filter">Protein</label>
                     <select id="protein-filter">
@@ -854,7 +822,7 @@
                 </button>
             </div>
 
-            <div id="filter-results" class="filter-results"></div>
+            <div id="filter-results" class="filter-results" role="status"></div>
         </section>
 
 
@@ -1297,8 +1265,8 @@
         const filterSection =
             document.getElementById("filter-section");
 
-        const categoryButtons =
-            document.getElementById("category-buttons");
+        const categoryFilter =
+            document.getElementById("category-filter");
 
         const proteinFilter =
             document.getElementById("protein-filter");
@@ -1511,8 +1479,6 @@
         `;
 
 
-        let activeCategory = "All";
-
         function uniqueValues(recipes, property) {
             return [...new Set(
                 recipes.flatMap((recipe) => {
@@ -1531,19 +1497,9 @@
         }
 
         function buildCuisineFilters(cuisine) {
-            activeCategory = "All";
             filterSection.style.display = "block";
 
-            categoryButtons.innerHTML = cuisine.categories.map((category) => `
-                <button
-                    type="button"
-                    class="category-button ${category === "All" ? "active" : ""}"
-                    data-category="${category}"
-                >
-                    ${category}
-                </button>
-            `).join("");
-
+            populateSelect(categoryFilter, cuisine.categories.filter((category) => category !== "All"), "All Categories");
             populateSelect(proteinFilter, uniqueValues(cuisine.recipes, "protein"), "All Proteins");
             populateSelect(methodFilter, uniqueValues(cuisine.recipes, "method"), "All Methods");
             populateSelect(dietFilter, uniqueValues(cuisine.recipes, "diet"), "All");
@@ -1555,12 +1511,13 @@
             if (!selectedCuisine || !cuisines[selectedCuisine]) return;
 
             const recipes = cuisines[selectedCuisine].recipes;
+            const selectedCategory = categoryFilter.value;
             const selectedProtein = proteinFilter.value;
             const selectedMethod = methodFilter.value;
             const selectedDiet = dietFilter.value;
 
             const filteredRecipes = recipes.filter((recipe) => {
-                const matchesCategory = activeCategory === "All" || recipe.category === activeCategory;
+                const matchesCategory = selectedCategory === "all" || recipe.category === selectedCategory;
                 const matchesProtein = selectedProtein === "all" || recipe.protein === selectedProtein;
                 const matchesMethod = selectedMethod === "all" || recipe.method === selectedMethod;
                 const matchesDiet = selectedDiet === "all" || (recipe.diet && recipe.diet.includes(selectedDiet));
@@ -1580,32 +1537,16 @@
             filterResults.textContent = `Showing ${filteredRecipes.length} of ${recipes.length} recipes`;
         }
 
-        categoryButtons.addEventListener("click", (event) => {
-            const button = event.target.closest(".category-button");
-            if (!button) return;
-
-            activeCategory = button.dataset.category;
-
-            document.querySelectorAll(".category-button").forEach((item) => {
-                item.classList.toggle("active", item === button);
-            });
-
-            updateFilteredRecipes();
-        });
-
+        categoryFilter.addEventListener("change", updateFilteredRecipes);
         proteinFilter.addEventListener("change", updateFilteredRecipes);
         methodFilter.addEventListener("change", updateFilteredRecipes);
         dietFilter.addEventListener("change", updateFilteredRecipes);
 
         clearFiltersButton.addEventListener("click", () => {
-            activeCategory = "All";
+            categoryFilter.value = "all";
             proteinFilter.value = "all";
             methodFilter.value = "all";
             dietFilter.value = "all";
-
-            document.querySelectorAll(".category-button").forEach((button) => {
-                button.classList.toggle("active", button.dataset.category === "All");
-            });
 
             updateFilteredRecipes();
         });
@@ -1620,16 +1561,16 @@
             const cuisine = cuisines[selectedCuisine];
 
             if (cuisine.categories.includes(tag)) {
-                activeCategory = tag;
+                categoryFilter.value = tag === "All" ? "all" : tag;
             }
             else if (tag === "Main") {
-                activeCategory = "Mains";
+                categoryFilter.value = "Mains";
             }
             else if (tag === "Bread") {
-                activeCategory = "Breads";
+                categoryFilter.value = "Breads";
             }
             else if (tag === "Side") {
-                activeCategory = "Vegetables & Sides";
+                categoryFilter.value = "Vegetables & Sides";
             }
             else if ([...proteinFilter.options].some((option) => option.value === tag)) {
                 proteinFilter.value = tag;
@@ -1640,10 +1581,6 @@
             else if ([...dietFilter.options].some((option) => option.value === tag)) {
                 dietFilter.value = tag;
             }
-
-            document.querySelectorAll(".category-button").forEach((button) => {
-                button.classList.toggle("active", button.dataset.category === activeCategory);
-            });
 
             updateFilteredRecipes();
         });
@@ -1700,6 +1637,8 @@
             const cuisine =
                 cuisines[selectedCuisine];
 
+
+            document.getElementById("cuisine-banner").classList.add("index-cuisine");
 
             /* Change title */
 
