@@ -539,7 +539,7 @@
 
 
         /* Desktop top-level navigation; mobile retains the Menu dropdown. */
-        .desktop-nav { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+        .desktop-nav { display: flex; align-items: center; gap: 6px; }
         .desktop-nav > a, .desktop-dinner > a { display: block; padding: 11px 12px; color: #222; text-decoration: none; font-weight: 600; font-size: .92rem; white-space: nowrap; border-radius: 8px; }
         .desktop-nav a:hover, .desktop-nav a:focus-visible { background: #f2f2f2; }
         .desktop-dinner { position: relative; }
@@ -548,7 +548,30 @@
         .desktop-dinner-options a { display: block; padding: 10px 16px; text-decoration: none; color: #222; font-size: .9rem; }
         /* Use regular-weight labels for dinner cuisines and dropdown items. */
         .desktop-dinner-options a, .menu-content a, .menu-content .menu-section-toggle { font-weight: 400; }
-        @media (min-width: 901px) { .menu { display: none; } }
+        @media (min-width: 901px) {
+            header {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+                column-gap: 16px;
+            }
+
+            header .logo {
+                justify-self: start;
+            }
+
+            header .header-search {
+                justify-self: end;
+                min-width: 0;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            header .header-search input {
+                min-width: 0;
+            }
+
+            .menu { display: none; }
+        }
         @media (max-width: 900px) { .desktop-nav { display: none; } }
 
         /* =========================
