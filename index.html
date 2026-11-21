@@ -281,65 +281,6 @@
             max-width: 700px;
         }
 
-        /* =========================
-           HOME PAGE
-        ========================= */
-
-        .home-page {
-            background-color: black;
-        }
-
-        .home-page .cuisine-banner {
-            min-height: 520px;
-            background-image: url("Ks Kitchen Header.PNG");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .home-page .hero-content {
-            display: none;
-        }
-
-        /* =========================
-           CUISINE COLORS
-        ========================= */
-
-        .american {
-            background-color: #4a3728;
-        }
-
-        .chinese {
-            background-color: #8b1e1e;
-        }
-
-        .greek {
-            background-color: #386641;
-        }
-
-        .indian {
-            background-color: #b45f06;
-        }
-
-        .italian {
-            background-color: #a63d40;
-        }
-
-        .japanese {
-            background-color: #5c536d;
-        }
-
-        .mexican {
-                    background-color: #006847;
-                }
-        .desserts { background-color: #8b4a63; }
-
-        .thai { background-color: #9c3b32; }
-
-        .moroccan {
-            background-color: #FF0000;
-        }
-
           /* =========================
               RECIPE SECTION
           ========================= */
@@ -661,10 +602,6 @@
                 min-height: 150px;
             }
 
-            .home-page .cuisine-banner {
-                background-image: url("Ks Kitchen Mobile.png");
-            }
-
             .hero-content {
                 padding: 20px 18px;
             }
@@ -730,7 +667,7 @@
     <link rel="stylesheet" href="compact-index.css">
 </head>
 
-<body>
+<body class="compact-index">
 
     <!-- =========================
          HEADER
@@ -822,10 +759,12 @@
 
     <main id="hero">
         <div class="index-home">
+            <img class="index-brand-image" src="Ks%20Kitchen%20Header.PNG" width="1344" height="391" alt="K’s Kitchen">
             <section class="index-hero" aria-labelledby="index-title">
                 <div>
                     <nav class="index-categories" aria-label="Browse by meal">
                         <a href="?meal=breakfast">Breakfast</a>
+                        <a href="?meal=lunch">Lunch</a>
                         <a href="?meal=dinner">Dinner</a>
                         <a href="?cuisine=desserts">Desserts</a>
                     </nav>
@@ -836,7 +775,6 @@
                         <button type="submit">Search</button>
                     </form>
                 </div>
-                <img class="index-hero-image" src="recipes/american/Crispy-Breakfast-Potatoes.jpg" alt="Golden roasted breakfast potatoes">
             </section>
             <section class="index-featured" aria-labelledby="index-featured-title">
                 <h2 id="index-featured-title">Featured recipes</h2>
@@ -991,7 +929,6 @@
             desserts: {
                 name: "Desserts",
                 description: "Sweet treats, cookies, and bakes made for sharing.",
-                colorClass: "desserts",
                 categories: ["All", "Desserts"],
                 recipes: [
                     {
@@ -1011,7 +948,6 @@
             american: {
                 name: "American",
                 description: "Comfort food, classic favorites, and modern dishes inspired by the diverse flavors of American cooking.",
-                colorClass: "american",
                 categories: universalCategories,
                 recipes: [
                     {
@@ -1074,7 +1010,6 @@
             chinese: {
                 name: "Chinese",
                 description: "Flavorful dishes built around savory sauces, aromatic spices, fresh vegetables, and the rich regional traditions of Chinese cuisine.",
-                colorClass: "chinese",
                 categories: universalCategories,
                 recipes: [
                     { name: "Skillet Ground Chicken Wontons", description: "Crispy-bottomed ground chicken wontons, pan-seared and steamed in one skillet.", href: "recipes/chinese/Skillet-Ground-Chicken-Wontons.html", image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=900", category: "Mains", protein: "Chicken", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Chicken", "Stovetop"] },
@@ -1095,7 +1030,6 @@
             greek: {
                 name: "Greek",
                 description: "Fresh, bright Mediterranean flavors featuring herbs, grilled proteins, vegetables, grains, and vibrant sauces.",
-                colorClass: "greek",
                 categories: universalCategories,
                 recipes: [
                     { name: "Greek Beef Bowls", description: "Lemony oregano beef bowls with rice, cucumber, tomatoes, olives and a dairy-free lemon-tahini sauce.", href: "recipes/greek/Greek-Beef-Bowls.html", image: "https://www.lemontreedwelling.com/wp-content/uploads/2025/02/greek-bowls-featured-1-500x500.jpg", category: "Mains", protein: "Beef", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "High Protein", "Beef", "Stovetop"] },
@@ -1136,7 +1070,6 @@
             indian: {
                 name: "Indian",
                 description: "Bold and aromatic recipes featuring layered spices, rich sauces, grilled proteins, vegetables, and traditional Indian flavors.",
-                colorClass: "indian",
                 categories: universalCategories,
                 recipes: [
                     {
@@ -1200,7 +1133,6 @@
             italian: {
                 name: "Italian",
                 description: "Simple, flavorful cooking centered around quality ingredients, fresh herbs, pasta, meats, vegetables, and classic Italian techniques.",
-                colorClass: "italian",
                 categories: universalCategories,
                 recipes: [
                     { name: "Homemade Baked Ziti", description: "Hearty baked ziti layered with seasoned beef marinara, ricotta, mozzarella and Parmesan. Serves 6.", href: "recipes/italian/Homemade-Baked-Ziti.html", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Baked_Ziti.jpg", category: "Mains", protein: "Beef", method: "Oven", diet: [], tags: ["Italian", "Pasta", "Beef", "Baked"] },
@@ -1232,7 +1164,6 @@
             japanese: {
                 name: "Japanese",
                 description: "Balanced and refined dishes emphasizing fresh ingredients, umami-rich flavors, rice, noodles, vegetables, and traditional Japanese techniques.",
-                colorClass: "japanese",
                 categories: universalCategories,
                 recipes: [
                     {
@@ -1271,7 +1202,6 @@
             mexican: {
                 name: "Mexican",
                 description: "Vibrant and bold dishes featuring fresh ingredients, rich sauces, grilled proteins, and traditional Mexican flavors.",
-                colorClass: "mexican",
                 categories: universalCategories,
                 recipes: [
                     { name: "Chicken Enchiladas with Homemade Red Sauce", description: "Baked shredded chicken and black bean enchiladas with homemade smoky red enchilada sauce.", href: "recipes/mexican/Chicken-Enchiladas-Homemade-Sauce.html", image: "https://images.unsplash.com/photo-1534352956036-cd81e27dd615?w=900", category: "Mains", protein: "Chicken", method: "Oven", diet: ["Dairy Free"], tags: ["Dinner", "Chicken", "Oven"] },
@@ -1325,12 +1255,11 @@
                 ]
             },
 
-            thai: { name: "Thai", description: "Fragrant curries, coconut milk, aromatic herbs and bold Thai-inspired flavors.", colorClass: "thai", categories: universalCategories, recipes: [{ name: "Thai Basil Beef", description: "Savory ground beef stir-fried with garlic, chilies and fresh Thai basil.", href: "recipes/thai/Thai-Basil-Beef.html", image: "recipes/thai/Thai-Basil-Beef.jpg", category: "Mains", protein: "Beef", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Beef", "Stovetop"] }, {"name":"Stovetop Thai Red Curry Chicken","description":"Creamy coconut red curry with chicken thighs, bell pepper, green beans, lime, and Thai basil.","href":"recipes/thai/Stovetop-Thai-Red-Curry-Chicken.html","image":"https://teresasrecipes.com/images/4090fc2b-40e0-4d52-b7fd-cb9ba6b9366b.jpg","category":"Mains","protein":"Chicken","method":"Stovetop","diet":["Dairy Free"],"tags":["Dinner","Chicken","Stovetop","Dairy Free"]}] },
+            thai: { name: "Thai", description: "Fragrant curries, coconut milk, aromatic herbs and bold Thai-inspired flavors.", categories: universalCategories, recipes: [{ name: "Thai Basil Beef", description: "Savory ground beef stir-fried with garlic, chilies and fresh Thai basil.", href: "recipes/thai/Thai-Basil-Beef.html", image: "recipes/thai/Thai-Basil-Beef.jpg", category: "Mains", protein: "Beef", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Beef", "Stovetop"] }, {"name":"Stovetop Thai Red Curry Chicken","description":"Creamy coconut red curry with chicken thighs, bell pepper, green beans, lime, and Thai basil.","href":"recipes/thai/Stovetop-Thai-Red-Curry-Chicken.html","image":"https://teresasrecipes.com/images/4090fc2b-40e0-4d52-b7fd-cb9ba6b9366b.jpg","category":"Mains","protein":"Chicken","method":"Stovetop","diet":["Dairy Free"],"tags":["Dinner","Chicken","Stovetop","Dairy Free"]}] },
 
             moroccan: {
                 name: "Moroccan",
                 description: "Warm and aromatic dishes featuring complex spice blends, slow-cooked stews, tagines, and traditional Moroccan flavors.",
-                colorClass: "moroccan",
                 categories: universalCategories,
                 recipes: [
                     {
@@ -1349,9 +1278,6 @@
         };
 
         /* Get page elements */
-
-        const hero =
-            document.getElementById("hero");
 
         const title =
             document.getElementById("page-title");
@@ -1734,7 +1660,6 @@
                         .includes(normalizedSearch)
                 );
 
-            hero.classList.add("home-page");
             title.textContent = `Search results for "${searchTerm}"`;
             description.textContent = matchingRecipes.length
                 ? `${matchingRecipes.length} recipe${matchingRecipes.length === 1 ? "" : "s"} found across K's Kitchen.`
@@ -1753,7 +1678,6 @@
                 return (recipe.tags || []).some((tag) => tag.toLowerCase() === selectedMeal)
                     || (recipe.category || "").toLowerCase() === selectedMeal;
             });
-            hero.classList.add("home-page");
             title.textContent = mealName;
             description.textContent = mealRecipes.length
                 ? `Browse our ${mealName.toLowerCase()} recipes.`
@@ -1772,19 +1696,6 @@
 
             const cuisine =
                 cuisines[selectedCuisine];
-
-
-            /* Change background */
-
-            hero.classList.remove("home-page");
-
-            hero.classList.add(
-                cuisine.colorClass
-            );
-
-            recipeSection.classList.add(
-                cuisine.colorClass
-            );
 
 
             /* Change title */
@@ -1817,7 +1728,7 @@
 
             /* Home page */
 
-            document.body.classList.add("compact-index");
+            document.body.classList.add("compact-index-home");
 
         }
 

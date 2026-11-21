@@ -37,24 +37,36 @@ body.compact-index {
     background: transparent;
 }
 
-body.compact-index:has(.index-home) .header-search,
-.compact-index #cuisine-banner {
+.compact-index-home .header-search,
+.compact-index-home #cuisine-banner {
     display: none;
 }
 
-.compact-index .index-home {
+.compact-index-home .index-home {
     display: block;
     padding: clamp(12px, 3vw, 36px);
 }
 
-.compact-index .index-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(16px, 4vw, 52px);
-    align-items: center;
+.index-brand-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
 }
 
-.index-kicker,
+.compact-index-home .index-hero {
+    display: block;
+    max-width: 620px;
+    margin-top: 24px;
+}
+
+.index-categories {
+    font: 600 .75rem/1.5 ui-monospace, monospace;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--index-muted);
+}
+
 .index-categories {
     font: 600 .75rem/1.5 ui-monospace, monospace;
     letter-spacing: .07em;
@@ -81,16 +93,11 @@ body.compact-index:has(.index-home) .header-search,
     letter-spacing: -.055em;
 }
 
-.index-hero-image,
 .index-tile img {
     display: block;
     width: 100%;
     object-fit: cover;
     border-radius: 10px;
-}
-
-.index-hero-image {
-    aspect-ratio: 1.66;
 }
 
 .index-search {
@@ -118,7 +125,7 @@ body.compact-index:has(.index-home) .header-search,
     cursor: pointer;
 }
 
-.compact-index .index-featured {
+.compact-index-home .index-featured {
     display: block;
     margin-top: 30px;
     padding-top: 14px;
@@ -145,6 +152,47 @@ body.compact-index:has(.index-home) .header-search,
 }
 
 .index-tile img {
+    aspect-ratio: 1.55;
+}
+
+.compact-index #cuisine-banner {
+    min-height: 0;
+    justify-content: flex-start;
+    text-align: left;
+    border-bottom: 1px solid var(--index-line);
+}
+
+.compact-index #cuisine-banner h1 {
+    color: var(--index-ink);
+    font-size: clamp(2rem, 4.6vw, 3.6rem);
+    letter-spacing: -.045em;
+    overflow-wrap: anywhere;
+}
+
+.compact-index #cuisine-banner p {
+    color: var(--index-muted);
+    margin: 8px 0 0;
+}
+
+.compact-index .filter-section {
+    background: transparent;
+}
+
+.compact-index .secondary-filters {
+    background: #ecf0f3;
+}
+
+.compact-index .category-button.active {
+    background: #354e64;
+    border-color: #354e64;
+}
+
+.compact-index .recipe-card {
+    border: 1px solid var(--index-line);
+    box-shadow: none;
+}
+
+.compact-index .recipe-image {
     aspect-ratio: 1.55;
 }
 
@@ -190,6 +238,7 @@ body.compact-index:has(.index-home) .header-search,
 }
 
 .compact-index .recipe-layout h2 {
+    overflow-wrap: anywhere;
     margin-bottom: 10px;
     font-size: 1.25rem;
     color: var(--index-ink);
@@ -208,27 +257,31 @@ body.compact-index:has(.index-home) .header-search,
     color: var(--index-muted);
 }
 
-.index-ingredients ul {
+.compact-index .recipe-sidebar ul:has(input[type="checkbox"]) {
     list-style: none;
     padding: 0;
 }
 
-.index-ingredients li {
+.compact-index .recipe-sidebar li:has(input[type="checkbox"]) {
     margin: 0;
 }
 
-.index-ingredients label {
+.compact-index .recipe-sidebar h2:not(:first-child) {
+    margin-top: 18px;
+}
+
+.compact-index .recipe-sidebar label {
     display: flex;
     gap: 8px;
     align-items: baseline;
     padding: 5px 0;
 }
 
-.index-ingredients input {
+.compact-index .recipe-sidebar input {
     accent-color: #354e64;
 }
 
-.index-ingredients input:checked + span {
+.compact-index .recipe-sidebar input:checked + span {
     text-decoration: line-through;
     color: var(--index-muted);
 }
@@ -244,8 +297,13 @@ body.compact-index:has(.index-home) .header-search,
     font-weight: 700;
 }
 
+@media (min-width: 601px) and (max-width: 760px) {
+    .compact-index .secondary-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 @media (max-width: 700px) {
-    .compact-index .index-hero,
     .compact-index .recipe-header,
     .compact-index .recipe-layout {
         grid-template-columns: minmax(0, 1fr);
