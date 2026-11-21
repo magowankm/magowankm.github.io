@@ -212,13 +212,12 @@ body.compact-index {
     letter-spacing: -.045em;
 }
 
-.compact-index .recipe-intro {
-    margin: 0;
-    padding: 14px clamp(12px, 3vw, 32px);
-    border-bottom: 1px solid var(--index-line);
+.compact-index .recipe-header .description {
     color: var(--index-muted);
+    margin: 10px 0 0;
     font-size: 1rem;
-    line-height: 1.55;
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
 .compact-index .recipe-header-image {
