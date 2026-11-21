@@ -252,7 +252,7 @@
 
         .cuisine-banner {
             width: 100%;
-            min-height: 390px;
+            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -262,12 +262,13 @@
 
         .hero-content {
             max-width: 900px;
-            padding: 50px 40px;
+            padding: 26px 32px;
         }
 
         .hero-content h1 {
             color: white;
-            font-size: clamp(3.5rem, 9vw, 8rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
             font-weight: 800;
             letter-spacing: -3px;
         }
@@ -276,7 +277,7 @@
             color: #f5f5f5;
             font-size: 1.15rem;
             line-height: 1.7;
-            margin: 18px auto 0;
+            margin: 10px auto 0;
             max-width: 700px;
         }
 
@@ -668,7 +669,7 @@
             }
 
             .cuisine-banner {
-                min-height: 320px;
+                min-height: 150px;
             }
 
             .home-page .cuisine-banner {
@@ -676,7 +677,12 @@
             }
 
             .hero-content {
-                padding: 35px 25px;
+                padding: 20px 18px;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                line-height: 1.5;
             }
 
             .recipe-section {
@@ -976,7 +982,7 @@
                 colorClass: "american",
                 categories: universalCategories,
                 recipes: [
-                    { name: "Steak and Frites", description: "Pan-seared steak with crisp oven-baked fries and a simple garlic-herb finish.", href: "recipes/american/Steak-and-Frites.html", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=900", category: "Mains", protein: "Beef", method: "Oven", diet: ["Dairy Free"], tags: ["Dinner", "Beef", "Oven"] },
+                    { name: "Steak and Frites", description: "Pan-seared steak with crisp oven-baked fries and a simple garlic-herb finish.", href: "recipes/american/Steak-and-Frites.html", image: "recipes/american/Steak-and-Frites.jpg", category: "Mains", protein: "Beef", method: "Oven", diet: ["Dairy Free"], tags: ["Dinner", "Beef", "Oven"] },
                     { name: "Homemade Chicken Nuggets", description: "Crispy oven-baked homemade chicken nuggets with a seasoned breadcrumb coating.", href: "recipes/american/Homemade-Chicken-Nuggets.html", image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=900", category: "Mains", protein: "Chicken", method: "Oven", diet: ["Dairy Free"], tags: ["Dinner", "Chicken", "Oven"] },
                     {
                         name: "Classic Smash Burger Bowl Beef",
@@ -1031,16 +1037,6 @@
                     { name: "Skillet Ground Chicken Wontons", description: "Crispy-bottomed ground chicken wontons, pan-seared and steamed in one skillet.", href: "recipes/chinese/Skillet-Ground-Chicken-Wontons.html", image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=900", category: "Mains", protein: "Chicken", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Chicken", "Stovetop"] },
                     { name: "Honey Garlic Chicken", description: "Sticky honey-soy glazed chicken with garlic and ginger, cooked in a skillet.", href: "recipes/chinese/Honey-Garlic-Chicken.html", image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=900", category: "Mains", protein: "Chicken", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Chicken", "Stovetop"] },
                     {
-                        name: "Vegetable Stir-Fry",
-                        description: "Crisp vegetables tossed in a savory sauce for a quick, colorful meal.",
-                        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900",
-                        category: "Vegetables & Sides",
-                        protein: "Vegetarian",
-                        method: "Stovetop",
-                        diet: ["Vegetarian"],
-                        tags: ["Vegetables & Sides", "Vegetarian", "Stovetop", "Stir-Fry"]
-                    },
-                    {
                         name: "Fried Rice",
                         description: "Steamed rice, vegetables, and aromatics brought together in a hot wok.",
                         image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=900",
@@ -1049,16 +1045,6 @@
                         method: "Stovetop",
                         diet: ["Vegetarian"],
                         tags: ["Rice & Grains", "Vegetarian", "Stovetop"]
-                    },
-                    {
-                        name: "Pork Dumplings",
-                        description: "Tender filled dumplings served with a bright, savory dipping sauce.",
-                        image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=900",
-                        category: "Mains",
-                        protein: "Pork",
-                        method: "Stovetop",
-                        diet: [],
-                        tags: ["Main", "Pork", "Stovetop", "Dumplings"]
                     }
                 ]
             },
@@ -1209,7 +1195,7 @@
                     {
                         name: "Chicken Teriyaki",
                         description: "Tender chicken glazed with a glossy, sweet-savory teriyaki sauce.",
-                        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pasta_e_fagioli_-_minestra.jpg",
+                        image: "recipes/japanese/Chicken-Teriyaki.jpg",
                         category: "Mains",
                         protein: "Chicken",
                         method: "Stovetop",
@@ -1219,7 +1205,7 @@
                     {
                         name: "Miso Soup",
                         description: "A soothing broth with miso, tofu, seaweed, and fresh scallions.",
-                        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pasta_e_fagioli_-_minestra.jpg",
+                        image: "recipes/japanese/Miso-Soup.jpg",
                         category: "Soups, Stews & Saucy Dishes",
                         protein: "Tofu",
                         method: "Stovetop",
@@ -1296,7 +1282,7 @@
                 ]
             },
 
-            thai: { name: "Thai", description: "Fragrant curries, coconut milk, aromatic herbs and bold Thai-inspired flavors.", colorClass: "thai", categories: universalCategories, recipes: [{ name: "Thai Basil Beef", description: "Savory ground beef stir-fried with garlic, chilies and fresh Thai basil.", href: "recipes/thai/Thai-Basil-Beef.html", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pasta_e_fagioli_-_minestra.jpg", category: "Mains", protein: "Beef", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Beef", "Stovetop"] }, { name: "Slow Cooker Thai Red Chicken Curry", description: "Tender chicken and vegetables in a fragrant coconut red curry sauce.", href: "recipes/thai/Slow-Cooker-Thai-Red-Curry.html", image: "https://teresasrecipes.com/images/4090fc2b-40e0-4d52-b7fd-cb9ba6b9366b.jpg", category: "Mains", protein: "Chicken", method: "Slow Cooker", diet: ["Dairy Free"], tags: ["Dinner", "Chicken", "Slow Cooker", "Dairy Free"] }, {"name":"Stovetop Thai Red Curry Chicken","description":"Creamy coconut red curry with chicken thighs, bell pepper, green beans, lime, and Thai basil.","href":"recipes/thai/Stovetop-Thai-Red-Curry-Chicken.html","image":"https://teresasrecipes.com/images/4090fc2b-40e0-4d52-b7fd-cb9ba6b9366b.jpg","category":"Mains","protein":"Chicken","method":"Stovetop","diet":["Dairy Free"],"tags":["Dinner","Chicken","Stovetop","Dairy Free"]}] },
+            thai: { name: "Thai", description: "Fragrant curries, coconut milk, aromatic herbs and bold Thai-inspired flavors.", colorClass: "thai", categories: universalCategories, recipes: [{ name: "Thai Basil Beef", description: "Savory ground beef stir-fried with garlic, chilies and fresh Thai basil.", href: "recipes/thai/Thai-Basil-Beef.html", image: "recipes/thai/Thai-Basil-Beef.jpg", category: "Mains", protein: "Beef", method: "Stovetop", diet: ["Dairy Free"], tags: ["Dinner", "Beef", "Stovetop"] }, {"name":"Stovetop Thai Red Curry Chicken","description":"Creamy coconut red curry with chicken thighs, bell pepper, green beans, lime, and Thai basil.","href":"recipes/thai/Stovetop-Thai-Red-Curry-Chicken.html","image":"https://teresasrecipes.com/images/4090fc2b-40e0-4d52-b7fd-cb9ba6b9366b.jpg","category":"Mains","protein":"Chicken","method":"Stovetop","diet":["Dairy Free"],"tags":["Dinner","Chicken","Stovetop","Dairy Free"]}] },
 
             moroccan: {
                 name: "Moroccan",
