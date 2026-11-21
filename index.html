@@ -297,68 +297,13 @@
             background-size: cover;
         }
 
-        .editorial-home {
-            background: #f9f5ed;
+        .home-landing {
+            display: flex;
+            flex-direction: column;
         }
 
-        .editorial-home > header,
-        .editorial-home > main {
-            width: 100%;
-            max-width: 1440px;
-            margin-inline: auto;
-            border-radius: 0;
-            box-shadow: none;
-            background: #f9f5ed;
-        }
-
-        .editorial-home > main {
-            margin-top: 0;
-        }
-
-        .editorial-home .logo,
-        .editorial-hero h1,
-        .editorial-home .recipe-section h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            color: #211c16;
-        }
-
-        .editorial-hero {
-            display: none;
-        }
-
-        .editorial-home .editorial-hero {
-            display: grid;
-            grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-            background: #f3ece0;
-            border-top: 1px solid #e4dbce;
-        }
-
-        .editorial-home .cuisine-banner {
-            display: none;
-        }
-
-        .editorial-hero h1 {
-            align-self: center;
-            padding: clamp(28px, 5vw, 84px);
-            font-size: clamp(2.5rem, 5.6vw, 5.5rem);
-            line-height: 1.02;
-            letter-spacing: -0.045em;
-        }
-
-        .editorial-hero img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-        }
-
-        .editorial-home .recipe-section {
-            padding-top: 24px;
-        }
-
-        .editorial-home .recipe-image {
-            aspect-ratio: 4 / 3;
+        .home-landing .cuisine-banner {
+            flex: 1;
         }
 
         .home-page .hero-content {
@@ -729,16 +674,9 @@
                 background-image: url("Ks Kitchen Mobile.png");
             }
 
-            .editorial-home .editorial-hero {
-                grid-template-columns: 1fr;
-            }
-
-            .editorial-hero h1 {
-                padding: 28px 24px;
-            }
-
-            .editorial-hero img {
-                aspect-ratio: 3 / 2;
+            .home-landing .cuisine-banner {
+                background-color: #ede5da;
+                background-size: 100% auto;
             }
 
             .hero-content {
@@ -896,12 +834,6 @@
     ========================= -->
 
     <main id="hero">
-
-        <section class="editorial-hero" aria-labelledby="editorial-title">
-            <h1 id="editorial-title">Recipes worth making again</h1>
-            <img src="homepage-lemon-herb-chicken.jpg" width="1200" height="800"
-                 alt="Grilled lemon and herb chicken with charred lemons and parsley">
-        </section>
 
         <!-- Cuisine Banner -->
 
@@ -1581,7 +1513,7 @@
             }
         });
 
-        const recipeCard = (recipe, showCuisine = false, showTags = true) => `
+        const recipeCard = (recipe, showCuisine = false) => `
             <article class="recipe-card">
                 <a href="${recipe.href || '#'}" style="text-decoration: none; color: inherit;">
                     <div class="recipe-image">
@@ -1599,7 +1531,7 @@
                     <p>${recipe.description}</p>
                     ${showCuisine && recipe.cuisine ? `<p>${recipe.cuisine}</p>` : ""}
 
-                    ${showTags && (recipe.tags || []).length ? `
+                    ${(recipe.tags || []).length ? `
                         <div class="recipe-tags">
                             ${(recipe.tags || []).map((tag) => `
                                 <button
@@ -1850,19 +1782,11 @@
 
         else {
 
-            document.body.classList.add("editorial-home");
-            const featuredRecipes = [
-                "recipes/american/Steak-and-Frites.html",
-                "recipes/thai/Thai-Basil-Beef.html",
-                "recipes/indian/Tandoori-Chicken.html"
-            ];
-            recipeSection.insertAdjacentHTML("afterbegin", "<h2>Featured recipes</h2>");
-            recipeGrid.innerHTML = featuredRecipes
-                .map((href) => allRecipes.find((recipe) => recipe.href === href))
-                .filter(Boolean)
-                .map((recipe) => recipeCard(recipe, true, false))
-                .join("");
-            recipeSection.style.display = "block";
+            /* Home page */
+
+            hero.classList.add(
+                "home-page", "home-landing"
+            );
 
         }
 
